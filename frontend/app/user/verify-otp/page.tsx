@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 
 export default function VerifyOtpPage() {
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
@@ -50,15 +51,7 @@ export default function VerifyOtpPage() {
             <div className="w-full max-w-[420px] text-center">
                 {/* AVAA Logo */}
                 <div className="flex justify-center mb-6">
-                    <svg width="80" height="80" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M60 10L90 60H30L60 10Z" fill="#1e3a4f" />
-                        <path d="M40 40L60 10L80 40H40Z" fill="#2a5a6e" opacity="0.9" />
-                        <path d="M30 60L50 30L70 60H30Z" fill="#3a8a8c" opacity="0.8" />
-                        <path d="M50 60L70 30L90 60H50Z" fill="#3a8a8c" opacity="0.8" />
-                        <path d="M25 70L45 40H65L45 70H25Z" fill="#4aa8a0" opacity="0.7" />
-                        <path d="M55 70L75 40H95L75 70H55Z" fill="#4aa8a0" opacity="0.7" />
-                        <path d="M35 80L55 55H75L55 80H35Z" fill="#6cc4b0" opacity="0.6" />
-                    </svg>
+                    <Image src="/avaa_logo.png" alt="AVAA Logo" width={80} height={80} priority />
                 </div>
 
                 {/* Heading */}

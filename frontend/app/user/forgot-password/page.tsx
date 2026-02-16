@@ -1,0 +1,79 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+
+export default function ForgotPasswordPage() {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Frontend only — no backend integration yet
+        setLoading(true);
+        setTimeout(() => setLoading(false), 1500);
+    };
+
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa] px-4">
+            <div className="w-full max-w-[480px]">
+                {/* Back to login */}
+                <Link
+                    href="/user/signin"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#5a6a75] hover:text-[#1e3a4f] transition-colors mb-8"
+                >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 12H5" />
+                        <path d="M12 19l-7-7 7-7" />
+                    </svg>
+                    Back to login
+                </Link>
+
+                {/* Heading */}
+                <h1 className="text-[28px] font-bold text-[#1a1a1a] mb-2">Forgot password?</h1>
+                <p className="text-[15px] text-[#5a6a75] mb-8">
+                    Enter your email and we&apos;ll send you reset instructions.
+                </p>
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Email Field */}
+                    <div>
+                        <label htmlFor="forgot-email" className="block text-[15px] font-semibold text-[#1a1a1a] mb-2">
+                            Email
+                        </label>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="M22 4L12 13L2 4" />
+                                </svg>
+                            </div>
+                            <input
+                                id="forgot-email"
+                                type="email"
+                                placeholder="you@example.com"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full py-3.5 rounded-xl text-white font-semibold text-[15px] transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        style={{
+                            background: 'linear-gradient(to right, #1e3a4f, #3a8a8c, #6cc4b0)',
+                        }}
+                    >
+                        {loading ? 'Sending...' : 'Send Reset Link'}
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
+}

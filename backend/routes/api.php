@@ -13,3 +13,10 @@ Route::group([
     Route::post('refresh', [AuthController::class , 'refresh'])->middleware('auth:api');
     Route::post('me', [AuthController::class , 'me'])->middleware('auth:api');
 });
+
+Route::group([
+    'prefix' => 'admin'
+], function ($router) {
+    Route::post('login', [App\Http\Controllers\AdminController::class , 'login']);
+    Route::get('dashboard', [App\Http\Controllers\AdminController::class , 'dashboard']);
+});

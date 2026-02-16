@@ -21,7 +21,7 @@ export default function LoginPage() {
         try {
             const response = await api.post('/auth/login', { email, password });
             localStorage.setItem('token', response.data.access_token);
-            router.push('/dashboard');
+            router.push('/user/dashboard');
         } catch (err: any) {
             setError(err.response?.data?.error || 'Invalid email or password');
         } finally {
@@ -37,7 +37,6 @@ export default function LoginPage() {
                     {/* AVAA Logo */}
                     <div className="mb-6">
                         <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            {/* Triangle shapes forming the AVAA logo */}
                             <path d="M60 10L90 60H30L60 10Z" fill="#1e3a4f" />
                             <path d="M40 40L60 10L80 40H40Z" fill="#2a5a6e" opacity="0.9" />
                             <path d="M30 60L50 30L70 60H30Z" fill="#3a8a8c" opacity="0.8" />
@@ -112,9 +111,9 @@ export default function LoginPage() {
                                 <label htmlFor="password" className="block text-[15px] font-semibold text-[#1a1a1a]">
                                     Password
                                 </label>
-                                <a href="#" className="text-sm font-medium text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                                <Link href="/user/forgot-password" className="text-sm font-medium text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
                                     Forgot password?
-                                </a>
+                                </Link>
                             </div>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -200,7 +199,7 @@ export default function LoginPage() {
                     {/* Sign Up Link */}
                     <p className="text-center text-[15px] text-[#6b7280] mt-8">
                         Don&apos;t have an account?{' '}
-                        <Link href="/signup" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                        <Link href="/user/signup" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
                             Sign up
                         </Link>
                     </p>

@@ -28,7 +28,7 @@ export default function RegisterPage() {
 
         try {
             await api.post('/auth/register', { name, email, password });
-            router.push('/signin');
+            router.push('/user/signin');
         } catch (err: any) {
             const errors = err.response?.data;
             if (typeof errors === 'string') {
@@ -230,7 +230,7 @@ export default function RegisterPage() {
                     {/* Sign In Link */}
                     <p className="text-center text-[15px] text-[#6b7280] mt-8">
                         Already have an account?{' '}
-                        <Link href="/signin" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                        <Link href="/user/signin" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
                             Sign in
                         </Link>
                     </p>

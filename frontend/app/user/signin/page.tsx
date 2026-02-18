@@ -84,7 +84,7 @@ export default function LoginPage() {
                                     placeholder="you@example.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                             </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
                                 <label htmlFor="password" className="block text-[15px] font-semibold text-[#1a1a1a]">
                                     Password
                                 </label>
-                                <Link href="/user/forgot-password" className="text-sm font-medium text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                                <Link href="/user/forgot-password" className="text-sm font-medium text-[#3CD894] hover:text-[#2bb574] transition-colors">
                                     Forgot password?
                                 </Link>
                             </div>
@@ -113,7 +113,7 @@ export default function LoginPage() {
                                     placeholder="••••••••"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-12 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                                 <button
@@ -142,7 +142,7 @@ export default function LoginPage() {
                             disabled={loading}
                             className="w-full py-3.5 rounded-xl text-white font-semibold text-[15px] transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                             style={{
-                                background: 'linear-gradient(to right, #1e3a4f, #3a8a8c, #6cc4b0)',
+                                background: '#3CD894',
                             }}
                         >
                             {loading ? 'Signing in...' : 'Sign In'}
@@ -184,7 +184,7 @@ export default function LoginPage() {
                     {/* Sign Up Link */}
                     <p className="text-center text-[15px] text-[#6b7280] mt-8">
                         Don&apos;t have an account?{' '}
-                        <Link href="/user/signup" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                        <Link href="/user/signup" className="font-semibold text-[#3CD894] hover:text-[#2bb574] transition-colors">
                             Sign up
                         </Link>
                     </p>

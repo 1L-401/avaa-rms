@@ -104,7 +104,7 @@ export default function RegisterPage() {
                                     placeholder="John Doe"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                             </div>
@@ -128,7 +128,7 @@ export default function RegisterPage() {
                                     placeholder="you@example.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                             </div>
@@ -152,7 +152,7 @@ export default function RegisterPage() {
                                     placeholder="••••••••"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full pl-12 pr-12 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-12 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                                 <button
@@ -193,7 +193,7 @@ export default function RegisterPage() {
                                     placeholder="••••••••"
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                     required
                                 />
                             </div>
@@ -205,7 +205,7 @@ export default function RegisterPage() {
                             disabled={loading}
                             className="w-full py-3.5 rounded-xl text-white font-semibold text-[15px] transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed mt-2"
                             style={{
-                                background: 'linear-gradient(to right, #1e3a4f, #3a8a8c, #6cc4b0)',
+                                background: '#3CD894',
                             }}
                         >
                             {loading ? 'Creating account...' : 'Create Account'}
@@ -215,7 +215,7 @@ export default function RegisterPage() {
                     {/* Sign In Link */}
                     <p className="text-center text-[15px] text-[#6b7280] mt-8">
                         Already have an account?{' '}
-                        <Link href="/user/signin" className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors">
+                        <Link href="/user/signin" className="font-semibold text-[#3CD894] hover:text-[#2bb574] transition-colors">
                             Sign in
                         </Link>
                     </p>

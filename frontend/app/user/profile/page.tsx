@@ -66,7 +66,7 @@ export default function ProfilePage() {
                             Jobs
                         </Link>
                         <button className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white"
-                            style={{ background: 'linear-gradient(to right, #1e3a4f, #3a8a8c)' }}>
+                            style={{ background: '#3CD894' }}>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
                             </svg>
@@ -106,7 +106,7 @@ export default function ProfilePage() {
                     <div>
                         <h2 className="text-lg font-bold text-[#1a1a1a]">{fullName}</h2>
                         <p className="text-sm text-[#5a6a75] mb-1">{email}</p>
-                        <button className="flex items-center gap-1.5 text-sm font-medium text-[#3a8a8c] hover:text-[#1e5a5a] transition-colors">
+                        <button className="flex items-center gap-1.5 text-sm font-medium text-[#3CD894] hover:text-[#2bb574] transition-colors">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
                             </svg>
@@ -140,7 +140,7 @@ export default function ProfilePage() {
                                     type="text"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                 />
                             </div>
                         </div>
@@ -159,7 +159,7 @@ export default function ProfilePage() {
                                     type="email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                 />
                             </div>
                         </div>
@@ -178,7 +178,7 @@ export default function ProfilePage() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                 />
                             </div>
                         </div>
@@ -197,7 +197,7 @@ export default function ProfilePage() {
                                     type="text"
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                 />
                             </div>
                         </div>
@@ -211,7 +211,7 @@ export default function ProfilePage() {
                             rows={3}
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
-                            className="w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all resize-none"
+                            className="w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
                         />
                     </div>
                 </div>
@@ -225,7 +225,7 @@ export default function ProfilePage() {
                         {skills.map((skill) => (
                             <span
                                 key={skill}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-[#e6f7f2] text-[#2a7a7a]"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-[#e6faf0] text-[#3CD894]"
                             >
                                 {skill}
                                 <button
@@ -248,7 +248,7 @@ export default function ProfilePage() {
                             value={newSkill}
                             onChange={(e) => setNewSkill(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            className="flex-1 px-4 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                            className="flex-1 px-4 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                         />
                         <button
                             onClick={addSkill}
@@ -268,7 +268,7 @@ export default function ProfilePage() {
                         onDrop={handleDrop}
                         onClick={() => fileInputRef.current?.click()}
                         className={`flex flex-col items-center justify-center py-10 px-6 rounded-2xl border-2 border-dashed cursor-pointer transition-all ${isDragging
-                            ? 'border-[#3a8a8c] bg-[#e6f7f2]'
+                            ? 'border-[#3CD894] bg-[#e6faf0]'
                             : 'border-[#d1d5db] bg-white hover:border-[#9ca3af]'
                             }`}
                     >
@@ -287,7 +287,7 @@ export default function ProfilePage() {
                         ) : (
                             <>
                                 <p className="text-sm text-[#5a6a75] mb-1">Drag and drop your resume, or click to browse</p>
-                                <span className="text-sm font-semibold text-[#3a8a8c]">Upload Resume</span>
+                                <span className="text-sm font-semibold text-[#3CD894]">Upload Resume</span>
                             </>
                         )}
                     </div>
@@ -297,7 +297,7 @@ export default function ProfilePage() {
                 <div className="flex justify-end">
                     <button
                         className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg"
-                        style={{ background: 'linear-gradient(to right, #1e3a4f, #3a8a8c, #6cc4b0)' }}
+                        style={{ background: '#3CD894' }}
                     >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />

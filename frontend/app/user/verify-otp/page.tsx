@@ -74,7 +74,7 @@ export default function VerifyOtpPage() {
                                 value={digit}
                                 onChange={(e) => handleChange(index, e.target.value)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                                className="w-12 h-14 text-center text-xl font-bold text-[#1a1a1a] border-2 border-[#d1d5db] rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#2a7a7a] focus:border-transparent transition-all"
+                                className="w-12 h-14 text-center text-xl font-bold text-[#1a1a1a] border-2 border-[#d1d5db] rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
                                 aria-label={`Digit ${index + 1}`}
                             />
                         ))}
@@ -85,7 +85,7 @@ export default function VerifyOtpPage() {
                         disabled={loading || otp.some((d) => !d)}
                         className="w-full py-3.5 rounded-xl text-white font-semibold text-[15px] transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                         style={{
-                            background: 'linear-gradient(to right, #1e3a4f, #3a8a8c, #6cc4b0)',
+                            background: '#3CD894',
                         }}
                     >
                         {loading ? 'Verifying...' : 'Verify Email'}
@@ -97,7 +97,7 @@ export default function VerifyOtpPage() {
                     Didn&apos;t receive the code?{' '}
                     <button
                         type="button"
-                        className="font-semibold text-[#2a7a7a] hover:text-[#1e5a5a] transition-colors"
+                        className="font-semibold text-[#3CD894] hover:text-[#2bb574] transition-colors"
                         onClick={() => {/* resend logic later */ }}
                     >
                         Resend

@@ -219,6 +219,8 @@ export default function UserDashboardPage() {
     const prevFilteredIds = useRef<number[]>([]);
     const router = useRouter();
 
+    useEffect(() => { document.title = 'Dashboard | AVAA'; }, []);
+
     const toggleSkill = (skill: string) => {
         setSelectedSkills((prev) =>
             prev.includes(skill) ? prev.filter((s) => s !== skill) : [...prev, skill]

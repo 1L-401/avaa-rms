@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 export default function VerifyOtpPage() {
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
     const [loading, setLoading] = useState(false);
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+    useEffect(() => { document.title = 'Verify Email | AVAA'; }, []);
 
     const handleChange = (index: number, value: string) => {
         if (!/^\d*$/.test(value)) return;

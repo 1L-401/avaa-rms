@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,8 @@ export default function SettingsPage() {
     const [showNewPassword, setShowNewPassword] = useState(false);
     const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
     const router = useRouter();
+
+    useEffect(() => { document.title = 'Settings | AVAA'; }, []);
 
     const handleSaveChanges = () => {
         // TODO: Implement save logic

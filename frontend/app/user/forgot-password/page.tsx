@@ -1,11 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => { document.title = 'Forgot Password | AVAA'; }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/useAuth';
 
 export default function ProfilePage() {
     const [fullName, setFullName] = useState('John Doe');
@@ -17,8 +18,20 @@ export default function ProfilePage() {
     const [resumeFile, setResumeFile] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const { isLoading, logout } = useAuth();
 
     useEffect(() => { document.title = 'Profile | AVAA'; }, []);
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
+                <div className="text-center">
+                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-[#5a6a75] text-sm">Loading...</p>
+                </div>
+            </div>
+        );
+    }
 
     const addSkill = () => {
         const trimmed = newSkill.trim();
@@ -81,7 +94,7 @@ export default function ProfilePage() {
                             Settings
                         </Link>
                         <button
-                            onClick={() => { localStorage.removeItem('token'); router.push('/user/signin'); }}
+                            onClick={logout}
                             className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

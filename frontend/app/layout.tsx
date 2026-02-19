@@ -10,6 +10,11 @@ export const metadata: Metadata = {
     template: '%s | AVAA',
   },
   description: 'AVAA Recruitment Management System',
+  icons: {
+    icon: '/avaa_logo.png',
+    shortcut: '/avaa_logo.png',
+    apple: '/avaa_logo.png',
+  },
 };
 
 export default function RootLayout({

@@ -1,9 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function AdminDashboardPage() {
     const router = useRouter();
+
+    useEffect(() => { document.title = 'Admin Dashboard | AVAA'; }, []);
 
     return (
         <div className="flex min-h-screen bg-gray-100">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/axios';
 
@@ -9,6 +9,8 @@ export default function AdminLoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+
+    useEffect(() => { document.title = 'Admin Login | AVAA'; }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

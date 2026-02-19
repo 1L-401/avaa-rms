@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -14,6 +14,8 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    useEffect(() => { document.title = 'Sign In | AVAA'; }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -24,6 +26,11 @@ export default function LoginPage() {
             localStorage.setItem('token', response.data.access_token);
             router.push('/user/dashboard');
         } catch (err: any) {
+            if (err.response?.data?.email_not_verified) {
+                const unverifiedEmail = err.response?.data?.email || email;
+                router.push(`/user/verify-otp?email=${encodeURIComponent(unverifiedEmail)}`);
+                return;
+            }
             setError(err.response?.data?.error || 'Invalid email or password');
         } finally {
             setLoading(false);

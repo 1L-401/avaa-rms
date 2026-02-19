@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/useAuth';
 
 const JOBS = [
     {
@@ -104,9 +105,108 @@ const JOBS = [
     },
 ];
 
-const SKILLS = ['React', 'TypeScript', 'Node.js', 'Python', 'AWS', 'Docker', 'Kubernetes', 'Figma'];
+// Collect all unique tags from jobs
+const ALL_TAGS = Array.from(new Set(JOBS.flatMap((j) => j.tags)));
 const COMPANIES = ['TechNova', 'DataStream', 'CreativeHub', 'CloudScale'];
 const DATE_FILTERS = ['All Time', 'Today', 'This Week', 'This Month'];
+
+// Animated job card wrapper
+function JobCard({
+    job,
+    isSelected,
+    isBookmarked,
+    onSelect,
+    onBookmark,
+    delay,
+    visible,
+}: {
+    job: typeof JOBS[0];
+    isSelected: boolean;
+    isBookmarked: boolean;
+    onSelect: () => void;
+    onBookmark: (e: React.MouseEvent) => void;
+    delay: number;
+    visible: boolean;
+}) {
+    return (
+        <div
+            onClick={onSelect}
+            style={{
+                transitionDelay: `${delay}ms`,
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'translateY(0)' : 'translateY(16px)',
+                transition: 'opacity 0.35s ease, transform 0.35s ease, box-shadow 0.2s ease, border-color 0.2s ease',
+            }}
+            className={`bg-white rounded-2xl border p-5 hover:shadow-lg group cursor-pointer ${isSelected
+                ? 'border-[#3CD894] shadow-md'
+                : 'border-[#e5e7eb] hover:border-[#c5ccd3]'
+                }`}
+        >
+            {/* Top Row: Avatar + Bookmark */}
+            <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                    <div
+                        className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-sm"
+                        style={{ backgroundColor: job.color }}
+                    >
+                        {job.initials}
+                    </div>
+                    <div>
+                        <h3 className="text-[15px] font-bold text-[#1a1a1a] leading-tight">{job.title}</h3>
+                        <p className="text-[13px] text-[#5a6a75]">{job.company}</p>
+                    </div>
+                </div>
+                <button
+                    onClick={onBookmark}
+                    className="text-[#9ca3af] hover:text-[#1e3a4f] transition-colors p-1"
+                >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill={isBookmarked ? '#1e3a4f' : 'none'} stroke={isBookmarked ? '#1e3a4f' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                    </svg>
+                </button>
+            </div>
+
+            {/* Meta Row */}
+            <div className="flex items-center gap-3 mb-4 text-[13px] text-[#5a6a75]">
+                <span className="flex items-center gap-1">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                    {job.location}
+                </span>
+                <span className="flex items-center gap-1">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                    {job.timeAgo}
+                </span>
+                <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${job.type === 'Full-time'
+                    ? 'bg-[#e6f7f2] text-[#3CD894]'
+                    : 'bg-[#fef3e2] text-[#b8860b]'
+                    }`}>
+                    {job.type}
+                </span>
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-4">
+                {job.tags.map((tag) => (
+                    <span
+                        key={tag}
+                        className="px-2.5 py-1 rounded-md text-[12px] font-medium bg-[#f0f2f5] text-[#5a6a75]"
+                    >
+                        {tag}
+                    </span>
+                ))}
+            </div>
+
+            {/* Bottom Row */}
+            <div className="flex items-center justify-between">
+                <span className="text-[15px] font-bold text-[#1a1a1a]">{job.salary}</span>
+                <span className="text-[13px] font-semibold text-[#3CD894] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                    View Details
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                </span>
+            </div>
+        </div>
+    );
+}
 
 export default function UserDashboardPage() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -118,6 +218,9 @@ export default function UserDashboardPage() {
     const [showMobileFilters, setShowMobileFilters] = useState(false);
     const [showApplyModal, setShowApplyModal] = useState(false);
     const router = useRouter();
+    const { isLoading, logout } = useAuth();
+
+    useEffect(() => { document.title = 'Dashboard | AVAA'; }, []);
 
     const toggleSkill = (skill: string) => {
         setSelectedSkills((prev) =>
@@ -136,6 +239,76 @@ export default function UserDashboardPage() {
             prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id]
         );
     };
+
+    // ─── Filtering Logic ──────────────────────────────────
+    const filteredJobs = JOBS.filter((job) => {
+        // Search: match title, company, location, or any tag
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase();
+            const matchesSearch =
+                job.title.toLowerCase().includes(q) ||
+                job.company.toLowerCase().includes(q) ||
+                job.location.toLowerCase().includes(q) ||
+                job.tags.some((tag) => tag.toLowerCase().includes(q));
+            if (!matchesSearch) return false;
+        }
+
+        // Skills filter: job must have ALL selected skills as tags
+        if (selectedSkills.length > 0) {
+            const matches = selectedSkills.every((skill) => job.tags.includes(skill));
+            if (!matches) return false;
+        }
+
+        // Company filter: job must belong to one of the selected companies
+        if (selectedCompanies.length > 0) {
+            if (!selectedCompanies.includes(job.company)) return false;
+        }
+
+        return true;
+    });
+
+    // ─── Animation: fade+slide cards in when filter changes ──
+    useEffect(() => {
+        const newIds = filteredJobs.map((j) => j.id);
+        // First, hide removed cards
+        const removed = prevFilteredIds.current.filter((id) => !newIds.includes(id));
+        if (removed.length > 0) {
+            setVisibleIds((prev) => prev.filter((id) => !removed.includes(id)));
+        }
+        // Then stagger-reveal new/remaining cards
+        newIds.forEach((id, i) => {
+            setTimeout(() => {
+                setVisibleIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+            }, i * 60);
+        });
+        prevFilteredIds.current = newIds;
+        // Close detail panel if selected job is filtered out
+        if (selectedJob && !newIds.includes(selectedJob.id)) {
+            setSelectedJob(null);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchQuery, selectedSkills, selectedCompanies, activeDateFilter]);
+
+    // Initial load animation
+    useEffect(() => {
+        JOBS.forEach((job, i) => {
+            setTimeout(() => {
+                setVisibleIds((prev) => [...prev, job.id]);
+            }, i * 80);
+        });
+        prevFilteredIds.current = JOBS.map((j) => j.id);
+    }, []);
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
+                <div className="text-center">
+                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-[#5a6a75] text-sm">Loading...</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-[#f5f7fa]">
@@ -216,7 +389,7 @@ export default function UserDashboardPage() {
 
                 <div className="flex gap-8">
                     {/* ─── Left Sidebar ─── */}
-                    <aside className={`hidden lg:block flex-shrink-0 ${selectedJob ? 'w-[200px]' : 'w-[240px]'} transition-all duration-200`}>
+                    <aside className={`hidden lg:block flex-shrink-0 ${selectedJob ? 'w-[200px]' : 'w-[240px]'} transition-all duration-300`}>
                         {/* Search */}
                         <div className="relative mb-6">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -241,7 +414,12 @@ export default function UserDashboardPage() {
                                     <button
                                         key={filter}
                                         onClick={() => setActiveDateFilter(filter)}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${activeDateFilter === filter
+                                        style={{
+                                            transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
+                                            transform: activeDateFilter === filter ? 'scale(1.05)' : 'scale(1)',
+                                            boxShadow: activeDateFilter === filter ? '0 2px 8px rgba(30,58,79,0.18)' : 'none',
+                                        }}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium ${activeDateFilter === filter
                                             ? 'bg-[#1e3a4f] text-white'
                                             : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
                                             }`}
@@ -252,15 +430,20 @@ export default function UserDashboardPage() {
                             </div>
                         </div>
 
-                        {/* Skills */}
+                        {/* Skills / Tags Filter */}
                         <div className="mb-6">
                             <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Skills</h3>
                             <div className="flex flex-wrap gap-2">
-                                {SKILLS.map((skill) => (
+                                {ALL_TAGS.map((skill) => (
                                     <button
                                         key={skill}
                                         onClick={() => toggleSkill(skill)}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${selectedSkills.includes(skill)
+                                        style={{
+                                            transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
+                                            transform: selectedSkills.includes(skill) ? 'scale(1.07)' : 'scale(1)',
+                                            boxShadow: selectedSkills.includes(skill) ? '0 2px 8px rgba(60,216,148,0.25)' : 'none',
+                                        }}
+                                        className={`px-3 py-1.5 rounded-full text-xs font-medium ${selectedSkills.includes(skill)
                                             ? 'bg-[#3CD894] text-white'
                                             : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
                                             }`}
@@ -288,6 +471,24 @@ export default function UserDashboardPage() {
                                 ))}
                             </div>
                         </div>
+
+                        {/* Clear Filters */}
+                        {(selectedSkills.length > 0 || selectedCompanies.length > 0 || searchQuery.trim()) && (
+                            <button
+                                onClick={() => {
+                                    setSelectedSkills([]);
+                                    setSelectedCompanies([]);
+                                    setSearchQuery('');
+                                }}
+                                style={{ transition: 'opacity 0.3s ease, transform 0.3s ease' }}
+                                className="mt-5 w-full px-3 py-2 rounded-lg text-xs font-semibold text-[#5a6a75] border border-[#d1d5db] hover:bg-[#f0f2f5] hover:text-[#1a1a1a] transition-colors flex items-center justify-center gap-1.5"
+                            >
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                                Clear Filters
+                            </button>
+                        )}
                     </aside>
 
                     {/* ─── Job Cards Grid ─── */}

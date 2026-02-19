@@ -1,12 +1,22 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import api from '@/lib/axios';
 
 export default function VerifyOtpPage() {
     const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
     const [loading, setLoading] = useState(false);
+    const [resending, setResending] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email') || '';
+
+    useEffect(() => { document.title = 'Verify Email | AVAA'; }, []);
 
     const handleChange = (index: number, value: string) => {
         if (!/^\d*$/.test(value)) return;
@@ -40,10 +50,41 @@ export default function VerifyOtpPage() {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError('');
+        setSuccess('');
         setLoading(true);
-        setTimeout(() => setLoading(false), 1500);
+
+        try {
+            const otpCode = otp.join('');
+            const response = await api.post('/auth/verify-otp', { email, otp: otpCode });
+            setSuccess(response.data.message || 'Email verified successfully!');
+            setTimeout(() => {
+                router.push('/user/signin');
+            }, 1500);
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Verification failed. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResend = async () => {
+        setError('');
+        setSuccess('');
+        setResending(true);
+
+        try {
+            const response = await api.post('/auth/resend-otp', { email });
+            setSuccess(response.data.message || 'A new code has been sent!');
+            setOtp(Array(6).fill(''));
+            inputRefs.current[0]?.focus();
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Failed to resend code. Please try again.');
+        } finally {
+            setResending(false);
+        }
     };
 
     return (
@@ -56,10 +97,26 @@ export default function VerifyOtpPage() {
 
                 {/* Heading */}
                 <h1 className="text-[24px] font-bold text-[#1e3a4f] mb-2">Verify your email</h1>
-                <p className="text-[14px] text-[#5a6a75] mb-8 leading-relaxed">
-                    We&apos;ve sent a 6-digit code to your email address. Enter it below to
-                    <br />verify your account.
+                <p className="text-[14px] text-[#5a6a75] mb-2 leading-relaxed">
+                    We&apos;ve sent a 6-digit code to
                 </p>
+                {email && (
+                    <p className="text-[14px] font-semibold text-[#1e3a4f] mb-8">{email}</p>
+                )}
+
+                {/* Error Message */}
+                {error && (
+                    <div className="mb-5 p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm text-left">
+                        {error}
+                    </div>
+                )}
+
+                {/* Success Message */}
+                {success && (
+                    <div className="mb-5 p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-600 text-sm text-left">
+                        {success}
+                    </div>
+                )}
 
                 {/* OTP Form */}
                 <form onSubmit={handleSubmit}>
@@ -97,10 +154,11 @@ export default function VerifyOtpPage() {
                     Didn&apos;t receive the code?{' '}
                     <button
                         type="button"
-                        className="font-semibold text-[#3CD894] hover:text-[#2bb574] transition-colors"
-                        onClick={() => {/* resend logic later */ }}
+                        disabled={resending}
+                        className="font-semibold text-[#3CD894] hover:text-[#2bb574] transition-colors disabled:opacity-50"
+                        onClick={handleResend}
                     >
-                        Resend
+                        {resending ? 'Sending...' : 'Resend'}
                     </button>
                 </p>
             </div>

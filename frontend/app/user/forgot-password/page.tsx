@@ -1,17 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import api from '@/lib/axios';
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    useEffect(() => { document.title = 'Forgot Password | AVAA'; }, []);
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Frontend only — no backend integration yet
+        setError('');
+        setSuccess('');
         setLoading(true);
-        setTimeout(() => setLoading(false), 1500);
+
+        try {
+            const response = await api.post('/auth/forgot-password', { email });
+            setSuccess(response.data.message || 'Check your email for the reset link.');
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -34,6 +48,20 @@ export default function ForgotPasswordPage() {
                 <p className="text-[15px] text-[#5a6a75] mb-8">
                     Enter your email and we&apos;ll send you reset instructions.
                 </p>
+
+                {/* Error Message */}
+                {error && (
+                    <div className="mb-5 p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
+                        {error}
+                    </div>
+                )}
+
+                {/* Success Message */}
+                {success && (
+                    <div className="mb-5 p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-600 text-sm">
+                        {success}
+                    </div>
+                )}
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-6">

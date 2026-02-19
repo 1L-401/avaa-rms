@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/useAuth';
 
 export default function ProfilePage() {
     const [fullName, setFullName] = useState('John Doe');
@@ -17,6 +18,20 @@ export default function ProfilePage() {
     const [resumeFile, setResumeFile] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const { isLoading, logout } = useAuth();
+
+    useEffect(() => { document.title = 'Profile | AVAA'; }, []);
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
+                <div className="text-center">
+                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-[#5a6a75] text-sm">Loading...</p>
+                </div>
+            </div>
+        );
+    }
 
     const addSkill = () => {
         const trimmed = newSkill.trim();

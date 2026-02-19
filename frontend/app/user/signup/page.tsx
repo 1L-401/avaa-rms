@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -16,6 +16,8 @@ export default function RegisterPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
+    useEffect(() => { document.title = 'Sign Up | AVAA'; }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -29,7 +31,7 @@ export default function RegisterPage() {
 
         try {
             await api.post('/auth/register', { name, email, password });
-            router.push('/user/signin');
+            router.push(`/user/verify-otp?email=${encodeURIComponent(email)}`);
         } catch (err: any) {
             const errors = err.response?.data;
             if (typeof errors === 'string') {

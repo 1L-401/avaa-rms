@@ -26,6 +26,11 @@ export default function LoginPage() {
             localStorage.setItem('token', response.data.access_token);
             router.push('/user/dashboard');
         } catch (err: any) {
+            if (err.response?.data?.email_not_verified) {
+                const unverifiedEmail = err.response?.data?.email || email;
+                router.push(`/user/verify-otp?email=${encodeURIComponent(unverifiedEmail)}`);
+                return;
+            }
             setError(err.response?.data?.error || 'Invalid email or password');
         } finally {
             setLoading(false);

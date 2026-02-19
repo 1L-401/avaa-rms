@@ -31,7 +31,7 @@ export default function RegisterPage() {
 
         try {
             await api.post('/auth/register', { name, email, password });
-            router.push('/user/signin');
+            router.push(`/user/verify-otp?email=${encodeURIComponent(email)}`);
         } catch (err: any) {
             const errors = err.response?.data;
             if (typeof errors === 'string') {

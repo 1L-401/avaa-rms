@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/axios';
 
-export function useAuth() {
+export function useAuth(options?: { redirect?: boolean }) {
+    const shouldRedirect = options?.redirect !== false;
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState<any>(null);
@@ -19,7 +20,7 @@ export function useAuth() {
             if (!token) {
                 if (!cancelled) {
                     setIsLoading(false);
-                    router.replace('/user/signin');
+                    if (shouldRedirect) router.replace('/user/signin');
                 }
                 return;
             }
@@ -36,7 +37,7 @@ export function useAuth() {
                 if (!cancelled) {
                     localStorage.removeItem('token');
                     setIsLoading(false);
-                    router.replace('/user/signin');
+                    if (shouldRedirect) router.replace('/user/signin');
                 }
             }
         };

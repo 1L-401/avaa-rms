@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/useAuth';
+import AuthPromptModal from '@/components/AuthPromptModal';
 
 const JOBS = [
     {
@@ -968,12 +969,13 @@ export default function UserDashboardPage() {
     const [showMobileFilters, setShowMobileFilters] = useState(false);
     const [showApplyModal, setShowApplyModal] = useState(false);
     const router = useRouter();
-    const { isLoading, logout } = useAuth();
+    const { isLoading, isAuthenticated, logout } = useAuth({ redirect: false });
     const [visibleIds, setVisibleIds] = useState<number[]>([]);
     const prevFilteredIds = useRef<number[]>([]);
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [showAllSkills, setShowAllSkills] = useState(false);
     const [showAllCompanies, setShowAllCompanies] = useState(false);
+    const [showAuthPrompt, setShowAuthPrompt] = useState(false);
 
     useEffect(() => { document.title = 'Dashboard | AVAA'; }, []);
 
@@ -1076,27 +1078,39 @@ export default function UserDashboardPage() {
                             </svg>
                             Jobs
                         </button>
-                        <Link href="/user/profile" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
-                            </svg>
-                            <span className="hidden sm:inline">Profile</span>
-                        </Link>
-                        <Link href="/user/settings" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                            </svg>
-                            <span className="hidden sm:inline">Settings</span>
-                        </Link>
-                        <button
-                            onClick={() => setShowLogoutConfirm(true)}
-                            className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
-                            </svg>
-                            <span className="hidden sm:inline">Sign Out</span>
-                        </button>
+                        {isAuthenticated && (
+                            <>
+                                <Link href="/user/profile" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                    </svg>
+                                    <span className="hidden sm:inline">Profile</span>
+                                </Link>
+                                <Link href="/user/settings" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                                    </svg>
+                                    <span className="hidden sm:inline">Settings</span>
+                                </Link>
+                                <button
+                                    onClick={() => setShowLogoutConfirm(true)}
+                                    className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
+                                >
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                    </svg>
+                                    <span className="hidden sm:inline">Sign Out</span>
+                                </button>
+                            </>
+                        )}
+                        {!isAuthenticated && !isLoading && (
+                            <Link href="/user/signin" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90" style={{ background: '#3CD894' }}>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" /><polyline points="10 17 15 12 10 7" /><line x1="15" y1="12" x2="3" y2="12" />
+                                </svg>
+                                Sign In
+                            </Link>
+                        )}
                     </div>
                 </div>
             </nav>
@@ -1269,7 +1283,7 @@ export default function UserDashboardPage() {
                                     }}
                                     onBookmark={(e) => {
                                         e.stopPropagation();
-                                        toggleBookmark(job.id);
+                                        isAuthenticated ? toggleBookmark(job.id) : setShowAuthPrompt(true);
                                     }}
                                     delay={index * 50}
                                     visible={visibleIds.includes(job.id)}
@@ -1297,14 +1311,14 @@ export default function UserDashboardPage() {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <button
-                                            onClick={() => setShowApplyModal(true)}
+                                            onClick={() => isAuthenticated ? setShowApplyModal(true) : setShowAuthPrompt(true)}
                                             className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-md"
                                             style={{ background: '#3CD894' }}
                                         >
                                             APPLY NOW
                                         </button>
                                         <button
-                                            onClick={() => toggleBookmark(selectedJob.id)}
+                                            onClick={() => isAuthenticated ? toggleBookmark(selectedJob.id) : setShowAuthPrompt(true)}
                                             className="text-[#9ca3af] hover:text-[#1e3a4f] transition-colors p-2"
                                         >
                                             <svg width="22" height="22" viewBox="0 0 24 24" fill={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'none'} stroke={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1615,7 +1629,7 @@ export default function UserDashboardPage() {
                     {/* Fixed Apply Button */}
                     <div className="p-4 border-t border-[#e5e7eb] bg-white absolute bottom-0 left-0 right-0">
                         <button
-                            onClick={() => setShowApplyModal(true)}
+                            onClick={() => isAuthenticated ? setShowApplyModal(true) : setShowAuthPrompt(true)}
                             className="w-full py-3.5 rounded-xl text-base font-bold text-white shadow-lg transition-transform active:scale-[0.98]"
                             style={{ background: '#3CD894' }}
                         >
@@ -1662,6 +1676,9 @@ export default function UserDashboardPage() {
                     </div>
                 </div>
             )}
+
+            {/* ─── Auth Prompt Modal ─── */}
+            <AuthPromptModal isOpen={showAuthPrompt} onClose={() => setShowAuthPrompt(false)} />
         </div>
     );
 }

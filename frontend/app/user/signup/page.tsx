@@ -18,6 +18,19 @@ export default function RegisterPage() {
 
     useEffect(() => { document.title = 'Sign Up | AVAA'; }, []);
 
+    // Redirect to dashboard if already logged in (prevents back-button issue)
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            api.post('/auth/me').then(() => {
+                router.replace('/user/dashboard');
+            }).catch(() => {
+                localStorage.removeItem('token');
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');

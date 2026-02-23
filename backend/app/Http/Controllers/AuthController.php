@@ -161,6 +161,29 @@ class AuthController extends Controller
     }
 
     /**
+     * Update the authenticated user's profile information.
+     */
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|between:2,100',
+            'phone' => 'sometimes|nullable|string|max:30',
+            'location' => 'sometimes|nullable|string|max:100',
+            'bio' => 'sometimes|nullable|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
+
+        $user = auth()->guard('api')->user();
+        $user->fill($validator->validated());
+        $user->save();
+
+        return response()->json($user);
+    }
+
+    /**
      * Log the user out (Invalidate the token).
      */
     public function logout()

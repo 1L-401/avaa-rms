@@ -54,9 +54,27 @@ const PARTNER_LOGOS = ['Google', 'Microsoft', 'Amazon', 'Meta', 'Apple'];
 export default function LandingPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [heroVisible, setHeroVisible] = useState(false);
+    const sectionsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => { document.title = 'AVAA – Find Your Ideal Job'; }, []);
     useEffect(() => { const t = setTimeout(() => setHeroVisible(true), 100); return () => clearTimeout(t); }, []);
+
+    // Scroll-triggered section animations
+    useEffect(() => {
+        const container = sectionsRef.current;
+        if (!container) return;
+        const sections = container.querySelectorAll('.section-enter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        sections.forEach((s) => observer.observe(s));
+        return () => observer.disconnect();
+    }, []);
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -66,7 +84,7 @@ export default function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-white overflow-x-hidden">
+        <div ref={sectionsRef} className="min-h-screen bg-white overflow-x-hidden page-enter">
             {/* ═══════════════════════════════════
                 NAVBAR
                ═══════════════════════════════════ */}
@@ -225,7 +243,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 HOW IT WORKS
                ═══════════════════════════════════ */}
-            <section id="how-it-works" className="py-20 bg-white">
+            <section id="how-it-works" className="py-20 bg-white section-enter">
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
                     <div className="text-center mb-14">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-[#e6faf0] text-[#3CD894] text-xs font-semibold mb-4">HOW IT WORKS</span>
@@ -252,7 +270,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 TOP COMPANIES
                ═══════════════════════════════════ */}
-            <section className="py-20 bg-[#f5f7fa]">
+            <section className="py-20 bg-[#f5f7fa] section-enter">
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
                     <div className="text-center mb-14">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-[#e6faf0] text-[#3CD894] text-xs font-semibold mb-4">TOP COMPANIES</span>
@@ -280,7 +298,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 BROWSE BY CATEGORIES
                ═══════════════════════════════════ */}
-            <section id="categories" className="py-20 bg-white">
+            <section id="categories" className="py-20 bg-white section-enter">
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
                     <div className="text-center mb-14">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-[#e6faf0] text-[#3CD894] text-xs font-semibold mb-4">CATEGORIES</span>
@@ -302,7 +320,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 AI RECRUITER CTA
                ═══════════════════════════════════ */}
-            <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1e3a4f 0%, #2a5a6e 100%)' }}>
+            <section className="relative overflow-hidden section-enter" style={{ background: 'linear-gradient(135deg, #1e3a4f 0%, #2a5a6e 100%)' }}>
                 {/* Decorative pattern */}
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #3CD894 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
@@ -352,7 +370,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 JOB OF THE DAY
                ═══════════════════════════════════ */}
-            <section id="jobs" className="py-20 bg-[#f5f7fa]">
+            <section id="jobs" className="py-20 bg-[#f5f7fa] section-enter">
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
                     <div className="text-center mb-14">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-[#e6faf0] text-[#3CD894] text-xs font-semibold mb-4">FEATURED LISTINGS</span>
@@ -399,7 +417,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 TESTIMONIALS
                ═══════════════════════════════════ */}
-            <section id="testimonials" className="py-20 bg-white">
+            <section id="testimonials" className="py-20 bg-white section-enter">
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
                     <div className="text-center mb-14">
                         <span className="inline-block px-4 py-1.5 rounded-full bg-[#e6faf0] text-[#3CD894] text-xs font-semibold mb-4">TESTIMONIALS</span>
@@ -433,7 +451,7 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 CTA SECTION
                ═══════════════════════════════════ */}
-            <section className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #3CD894 0%, #2bb87a 100%)' }}>
+            <section className="relative overflow-hidden section-enter" style={{ background: 'linear-gradient(135deg, #3CD894 0%, #2bb87a 100%)' }}>
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
                 <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-16 md:py-20 relative z-10 text-center">
                     <p className="text-sm font-semibold text-white/80 mb-3">Ready to Get Your Dream Job?</p>

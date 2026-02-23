@@ -1059,7 +1059,7 @@ export default function UserDashboardPage() {
     if (isLoading) return null;
 
     return (
-        <div className="min-h-screen bg-[#f5f7fa]">
+        <div className="min-h-screen bg-[#f5f7fa] page-enter">
             {/* ─── Navbar ─── */}
             <nav className="sticky top-0 z-30 bg-white border-b border-[#e5e7eb] px-6 lg:px-10">
                 <div className="flex items-center justify-between h-16 max-w-[1400px] mx-auto">

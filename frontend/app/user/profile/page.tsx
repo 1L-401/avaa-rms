@@ -21,6 +21,7 @@ export default function ProfilePage() {
     const [saveSuccess, setSaveSuccess] = useState(false);
     const [saveError, setSaveError] = useState('');
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const { isLoading, user, logout } = useAuth();
@@ -40,6 +41,18 @@ export default function ProfilePage() {
 
     if (isLoading) return null;
 
+    const handleCancel = () => {
+        // Revert to original user data
+        if (user) {
+            setFullName(user.name ?? '');
+            setPhone(user.phone ?? '');
+            setLocation(user.location ?? '');
+            setBio(user.bio ?? '');
+        }
+        setIsEditing(false);
+        setSaveError('');
+    };
+
     const handleSave = async () => {
         setSaving(true);
         setSaveError('');
@@ -52,6 +65,7 @@ export default function ProfilePage() {
                 bio: bio || null,
             });
             setSaveSuccess(true);
+            setIsEditing(false);
             setTimeout(() => setSaveSuccess(false), 3000);
         } catch (err: any) {
             setSaveError(err.response?.data?.error || 'Failed to save changes. Please try again.');
@@ -143,7 +157,21 @@ export default function ProfilePage() {
 
             {/* ─── Content ─── */}
             <div className="max-w-[780px] mx-auto px-6 py-8">
-                <h1 className="text-[28px] font-bold text-[#1a1a1a] mb-6">My Profile</h1>
+                <div className="flex items-center justify-between mb-6">
+                    <h1 className="text-[28px] font-bold text-[#1a1a1a]">My Profile</h1>
+                    {!isEditing && (
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
+                            style={{ background: '#3CD894' }}
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                            Edit Profile
+                        </button>
+                    )}
+                </div>
 
                 {/* ─── Avatar Card ─── */}
                 <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 mb-6 flex items-center gap-5">
@@ -197,7 +225,11 @@ export default function ProfilePage() {
                                     type="text"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
                                     placeholder="Your full name"
                                 />
                             </div>
@@ -238,7 +270,11 @@ export default function ProfilePage() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
                                     placeholder="+63 912 345 6789"
                                 />
                             </div>
@@ -258,7 +294,11 @@ export default function ProfilePage() {
                                     type="text"
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
                                     placeholder="City, Country"
                                 />
                             </div>
@@ -273,11 +313,15 @@ export default function ProfilePage() {
                             rows={3}
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
+                            readOnly={!isEditing}
                             maxLength={500}
-                            className="w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
+                            className={`w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all resize-none ${isEditing
+                                    ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                    : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                }`}
                             placeholder="Tell employers a bit about yourself..."
                         />
-                        <p className="text-right text-xs text-[#9ca3af] mt-1">{bio.length}/500</p>
+                        {isEditing && <p className="text-right text-xs text-[#9ca3af] mt-1">{bio.length}/500</p>}
                     </div>
                 </div>
 
@@ -354,29 +398,37 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                {/* ─── Save Button ─── */}
-                <div className="flex justify-end">
-                    <button
-                        onClick={handleSave}
-                        disabled={saving}
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{ background: '#3CD894' }}
-                    >
-                        {saving ? (
-                            <>
-                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                Saving...
-                            </>
-                        ) : (
-                            <>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
-                                </svg>
-                                Save Changes
-                            </>
-                        )}
-                    </button>
-                </div>
+                {/* ─── Action Buttons ─── */}
+                {isEditing && (
+                    <div className="flex justify-end gap-3">
+                        <button
+                            onClick={handleCancel}
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#d1d5db] text-sm font-semibold text-[#5a6a75] hover:bg-[#f5f7fa] transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            style={{ background: '#3CD894' }}
+                        >
+                            {saving ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
+                                    </svg>
+                                    Save Changes
+                                </>
+                            )}
+                        </button>
+                    </div>
+                )}
             </div>
             {/* ─── Sign Out Confirmation Modal ─── */}
             {showLogoutConfirm && (

@@ -21,6 +21,19 @@ Route::group([
 Route::group([
     'prefix' => 'admin'
 ], function ($router) {
-    Route::post('login', [App\Http\Controllers\AdminController::class , 'login']);
-    Route::get('dashboard', [App\Http\Controllers\AdminController::class , 'dashboard']);
+    // Public admin route
+    Route::post('login', [App\Http\Controllers\AdminController::class, 'login']);
+
+    // Protected admin routes (requires JWT + admin role)
+    Route::group(['middleware' => ['auth:api', 'admin']], function () {
+        Route::post('me', [App\Http\Controllers\AdminController::class, 'me']);
+        Route::post('logout', [App\Http\Controllers\AdminController::class, 'logout']);
+        Route::get('dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
+
+        // User management
+        Route::get('users', [App\Http\Controllers\AdminController::class, 'users']);
+        Route::get('users/{id}', [App\Http\Controllers\AdminController::class, 'showUser']);
+        Route::put('users/{id}', [App\Http\Controllers\AdminController::class, 'updateUser']);
+        Route::delete('users/{id}', [App\Http\Controllers\AdminController::class, 'deleteUser']);
+    });
 });

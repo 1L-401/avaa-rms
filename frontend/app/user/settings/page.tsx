@@ -16,6 +16,7 @@ export default function SettingsPage() {
     const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
     const router = useRouter();
     const { isLoading, logout } = useAuth();
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     useEffect(() => { document.title = 'Settings | AVAA'; }, []);
 
@@ -56,7 +57,7 @@ export default function SettingsPage() {
                             <span className="hidden sm:inline">Settings</span>
                         </button>
                         <button
-                            onClick={() => { localStorage.removeItem('token'); router.push('/user/signin'); }}
+                            onClick={() => setShowLogoutConfirm(true)}
                             className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -227,6 +228,36 @@ export default function SettingsPage() {
                     </button>
                 </div>
             </div>
+            {/* ─── Sign Out Confirmation Modal ─── */}
+            {showLogoutConfirm && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
+                    <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                            </div>
+                            <h3 className="text-lg font-bold text-[#1a1a1a] mb-1">Sign Out</h3>
+                            <p className="text-sm text-[#5a6a75] mb-6">Are you sure you want to sign out of your account?</p>
+                            <div className="flex gap-3 w-full">
+                                <button
+                                    onClick={() => setShowLogoutConfirm(false)}
+                                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#d1d5db] text-sm font-semibold text-[#5a6a75] hover:bg-[#f5f7fa] transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={logout}
+                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

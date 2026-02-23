@@ -19,16 +19,7 @@ export default function SettingsPage() {
 
     useEffect(() => { document.title = 'Settings | AVAA'; }, []);
 
-    if (isLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
-                <div className="text-center">
-                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-[#5a6a75] text-sm">Loading...</p>
-                </div>
-            </div>
-        );
-    }
+    if (isLoading) return null;
 
     const handleSaveChanges = () => {
         // TODO: Implement save logic

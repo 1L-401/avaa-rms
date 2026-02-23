@@ -237,10 +237,10 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 <div className="flex flex-col items-center">
                                     <div
                                         className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${step > s.id
-                                                ? 'bg-[#3CD894] text-white shadow-md shadow-[#3CD894]/30'
-                                                : step === s.id
-                                                    ? 'bg-[#1e3a4f] text-white shadow-md shadow-[#1e3a4f]/30'
-                                                    : 'bg-[#f0f2f5] text-[#9ca3af]'
+                                            ? 'bg-[#3CD894] text-white shadow-md shadow-[#3CD894]/30'
+                                            : step === s.id
+                                                ? 'bg-[#1e3a4f] text-white shadow-md shadow-[#1e3a4f]/30'
+                                                : 'bg-[#f0f2f5] text-[#9ca3af]'
                                             }`}
                                     >
                                         {step > s.id ? (
@@ -355,10 +355,10 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 onDrop={handleFileDrop}
                                 onClick={() => fileInputRef.current?.click()}
                                 className={`relative border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${dragOver
-                                        ? 'border-[#3CD894] bg-[#e6faf0]'
-                                        : selectedFile
-                                            ? 'border-[#3CD894] bg-[#f0fdf7]'
-                                            : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#3CD894] hover:bg-[#fafffe]'
+                                    ? 'border-[#3CD894] bg-[#e6faf0]'
+                                    : selectedFile
+                                        ? 'border-[#3CD894] bg-[#f0fdf7]'
+                                        : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#3CD894] hover:bg-[#fafffe]'
                                     }`}
                             >
                                 <input
@@ -556,8 +556,8 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                             onClick={handleNext}
                             disabled={!canGoNext()}
                             className={`flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all ${canGoNext()
-                                    ? 'hover:opacity-90 hover:shadow-lg shadow-md'
-                                    : 'opacity-50 cursor-not-allowed'
+                                ? 'hover:opacity-90 hover:shadow-lg shadow-md'
+                                : 'opacity-50 cursor-not-allowed'
                                 }`}
                             style={{ background: canGoNext() ? 'linear-gradient(135deg, #3CD894, #2bb87a)' : '#9ca3af' }}
                         >
@@ -787,16 +787,7 @@ export default function UserDashboardPage() {
         prevFilteredIds.current = JOBS.map((j) => j.id);
     }, []);
 
-    if (isLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
-                <div className="text-center">
-                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-[#5a6a75] text-sm">Loading...</p>
-                </div>
-            </div>
-        );
-    }
+    if (isLoading) return null;
 
     return (
         <div className="min-h-screen bg-[#f5f7fa]">

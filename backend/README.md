@@ -111,11 +111,11 @@ After running the seeder, a default admin account is created:
 ## API Endpoints
 
 ### Auth (User)
-| Method | Endpoint          | Description          |
-|--------|-------------------|----------------------|
-| POST   | `/api/register`   | Register a new user  |
-| POST   | `/api/login`      | User login           |
-| POST   | `/api/logout`     | User logout          |
+| Method | Endpoint               | Description          |
+|--------|------------------------|----------------------|
+| POST   | `/api/auth/register`   | Register a new user  |
+| POST   | `/api/auth/login`      | User login           |
+| POST   | `/api/auth/logout`     | User logout          |
 
 ### Auth (Admin)
 | Method | Endpoint             | Description            |

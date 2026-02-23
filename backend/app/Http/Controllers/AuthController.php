@@ -35,6 +35,10 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
+            'phone' => 'required|string|regex:/^639\d{9}$/',
+            'location' => 'required|string|max:100',
+        ], [
+            'phone.regex' => 'Phone must be a valid PH number starting with 639 (e.g. 639123456789).',
         ]);
 
         if ($validator->fails()) {
@@ -158,6 +162,55 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json(auth()->guard('api')->user());
+    }
+
+    /**
+     * Update the authenticated user's profile information.
+     */
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'sometimes|string|between:2,100',
+            'phone' => 'sometimes|nullable|string|max:30',
+            'location' => 'sometimes|nullable|string|max:100',
+            'bio' => 'sometimes|nullable|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
+
+        $user = auth()->guard('api')->user();
+        $user->fill($validator->validated());
+        $user->save();
+
+        return response()->json($user);
+    }
+
+    /**
+     * Change the authenticated user's password.
+     */
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 400);
+        }
+
+        $user = auth()->guard('api')->user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json(['error' => 'Current password is incorrect.'], 400);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json(['message' => 'Password changed successfully.']);
     }
 
     /**

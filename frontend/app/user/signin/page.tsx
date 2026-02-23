@@ -16,6 +16,19 @@ export default function LoginPage() {
 
     useEffect(() => { document.title = 'Sign In | AVAA'; }, []);
 
+    // Redirect to dashboard if already logged in (prevents back-button issue)
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            api.post('/auth/me').then(() => {
+                router.replace('/user/dashboard');
+            }).catch(() => {
+                localStorage.removeItem('token');
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -24,7 +37,7 @@ export default function LoginPage() {
         try {
             const response = await api.post('/auth/login', { email, password });
             localStorage.setItem('token', response.data.access_token);
-            router.push('/user/dashboard');
+            router.replace('/user/dashboard');
         } catch (err: any) {
             if (err.response?.data?.email_not_verified) {
                 const unverifiedEmail = err.response?.data?.email || email;

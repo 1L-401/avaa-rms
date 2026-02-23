@@ -35,6 +35,10 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
+            'phone' => 'required|string|regex:/^639\d{9}$/',
+            'location' => 'required|string|max:100',
+        ], [
+            'phone.regex' => 'Phone must be a valid PH number starting with 639 (e.g. 639123456789).',
         ]);
 
         if ($validator->fails()) {

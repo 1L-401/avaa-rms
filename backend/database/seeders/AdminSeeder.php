@@ -16,10 +16,12 @@ class AdminSeeder extends Seeder
                 'name'              => 'Admin',
                 'email'             => 'admin@avaa.com',
                 'password'          => Hash::make('admin123'),
-                'role'              => 'admin',
                 'email_verified_at' => now(),
             ]
         );
+        // Set role explicitly since it's not fillable
+        $admin->role = 'admin';
+        $admin->save();
 
         $this->command->info('');
         $this->command->info('========================================');

@@ -9,6 +9,8 @@ import api from '@/lib/axios';
 export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [location, setLocation] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -18,9 +20,36 @@ export default function RegisterPage() {
 
     useEffect(() => { document.title = 'Sign Up | AVAA'; }, []);
 
+    // Redirect to dashboard if already logged in (prevents back-button issue)
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            api.post('/auth/me').then(() => {
+                router.replace('/user/dashboard');
+            }).catch(() => {
+                localStorage.removeItem('token');
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+
+        // Email format check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Please enter a valid email address.');
+            return;
+        }
+
+        // PH phone format: must be 639 followed by 9 digits (12 digits total)
+        const digits = phone.replace(/\D/g, '');
+        if (!/^639\d{9}$/.test(digits)) {
+            setError('Phone must be a valid PH number starting with 639 (e.g. 639123456789).');
+            return;
+        }
 
         if (password !== confirmPassword) {
             setError('Passwords do not match');
@@ -30,7 +59,7 @@ export default function RegisterPage() {
         setLoading(true);
 
         try {
-            await api.post('/auth/register', { name, email, password });
+            await api.post('/auth/register', { name, email, phone: digits, location, password });
             router.push(`/user/verify-otp?email=${encodeURIComponent(email)}`);
         } catch (err: any) {
             const errors = err.response?.data;
@@ -136,7 +165,52 @@ export default function RegisterPage() {
                             </div>
                         </div>
 
-                        {/* Password Field */}
+                        {/* Phone Field */}
+                        <div>
+                            <label htmlFor="phone" className="block text-[15px] font-semibold text-[#1a1a1a] mb-2">
+                                Phone Number
+                            </label>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                                    </svg>
+                                </div>
+                                <input
+                                    id="phone"
+                                    type="tel"
+                                    placeholder="639123456789"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    required
+                                />
+                            </div>
+                            <p className="text-[11px] text-[#9ca3af] mt-1">Must start with 639 (e.g. 639123456789)</p>
+                        </div>
+
+                        {/* Location Field */}
+                        <div>
+                            <label htmlFor="location" className="block text-[15px] font-semibold text-[#1a1a1a] mb-2">
+                                Location
+                            </label>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                </div>
+                                <input
+                                    id="location"
+                                    type="text"
+                                    placeholder="City, Country"
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    required
+                                />
+                            </div>
+                        </div>
                         <div>
                             <label htmlFor="password" className="block text-[15px] font-semibold text-[#1a1a1a] mb-2">
                                 Password

@@ -103,11 +103,275 @@ const JOBS = [
             'Compensation: $140k–$180k + stock options and full benefits.',
         ],
     },
+    {
+        id: 5,
+        initials: 'AX',
+        color: '#6366f1',
+        title: 'Mobile Developer (React Native)',
+        company: 'AppAxis',
+        location: 'Los Angeles, CA',
+        timeAgo: '1d ago',
+        type: 'Full-time',
+        tags: ['React Native', 'TypeScript', 'iOS', 'Android'],
+        salary: '$110k-$150k',
+        position: 'Mobile Developer',
+        description: `AppAxis is hiring a Mobile Developer to build cross-platform apps with React Native. You'll own the full mobile stack from UI to deployment on both iOS and Android stores.`,
+        whatYoullDo: [
+            'Develop and maintain cross-platform mobile apps using React Native.',
+            'Integrate RESTful APIs and third-party SDKs for push notifications and analytics.',
+            'Publish and manage releases on the Apple App Store and Google Play.',
+        ],
+        whyCompany: [
+            'Impact: 5M+ active users rely on our mobile apps daily.',
+            'Tech Stack: Greenfield React Native with full TypeScript adoption.',
+            'Compensation: $110k–$150k + equity and wellness stipend.',
+        ],
+    },
+    {
+        id: 6,
+        initials: 'NL',
+        color: '#0ea5e9',
+        title: 'Data Scientist',
+        company: 'NeuraLabs',
+        location: 'Boston, MA',
+        timeAgo: '1d ago',
+        type: 'Full-time',
+        tags: ['Python', 'Machine Learning', 'TensorFlow'],
+        salary: '$135k-$175k',
+        position: 'Data Scientist',
+        description: `NeuraLabs is seeking a Data Scientist to build predictive models and drive data-informed product decisions. You'll work with large datasets and state-of-the-art ML frameworks.`,
+        whatYoullDo: [
+            'Build and deploy machine learning models for recommendation and forecasting.',
+            'Analyze large datasets to identify trends and actionable insights.',
+            'Collaborate with product and engineering teams to integrate ML into production.',
+        ],
+        whyCompany: [
+            'Research-Driven: Publish papers and attend top ML conferences.',
+            'Resources: Access to GPU clusters and cutting-edge tooling.',
+            'Compensation: $135k–$175k + research bonus and benefits.',
+        ],
+    },
+    {
+        id: 7,
+        initials: 'PH',
+        color: '#1e3a4f',
+        title: 'Product Manager',
+        company: 'PivotHub',
+        location: 'Remote',
+        timeAgo: '6h ago',
+        type: 'Full-time',
+        tags: ['Product Strategy', 'Agile', 'Analytics'],
+        salary: '$115k-$155k',
+        position: 'Product Manager',
+        description: `PivotHub is looking for a Product Manager to lead cross-functional teams and drive the product roadmap. You'll define strategy, prioritize features, and measure impact through data.`,
+        whatYoullDo: [
+            'Define product vision and roadmap based on user research and business goals.',
+            'Work with engineering, design, and marketing to ship features on time.',
+            'Analyze product metrics to inform decisions and iterate on the experience.',
+        ],
+        whyCompany: [
+            'Ownership: Lead a product area end-to-end with full autonomy.',
+            'Remote-First: Async culture with quarterly team retreats.',
+            'Compensation: $115k–$155k + performance bonuses.',
+        ],
+    },
+    {
+        id: 8,
+        initials: 'SG',
+        color: '#ef4444',
+        title: 'QA Engineer',
+        company: 'ShieldGuard',
+        location: 'Chicago, IL',
+        timeAgo: '3d ago',
+        type: 'Full-time',
+        tags: ['Selenium', 'Cypress', 'API Testing'],
+        salary: '$85k-$115k',
+        position: 'QA Engineer',
+        description: `ShieldGuard needs a QA Engineer to ensure the reliability and security of our fintech platform. You'll design test strategies and automate end-to-end testing with Cypress and Selenium.`,
+        whatYoullDo: [
+            'Design and execute test plans for web and API products.',
+            'Build and maintain automated test suites using Cypress and Selenium.',
+            'Collaborate with developers to identify and resolve defects pre-release.',
+        ],
+        whyCompany: [
+            'Mission: Protect millions of financial transactions every day.',
+            'Growth: Clear career path from QA Engineer to QA Lead.',
+            'Compensation: $85k–$115k + annual bonus and stock options.',
+        ],
+    },
+    {
+        id: 9,
+        initials: 'FL',
+        color: '#3CD894',
+        title: 'Full-Stack Developer',
+        company: 'FlowLabs',
+        location: 'Seattle, WA',
+        timeAgo: '12h ago',
+        type: 'Full-time',
+        tags: ['Next.js', 'Node.js', 'MongoDB'],
+        salary: '$125k-$165k',
+        position: 'Full-Stack Developer',
+        description: `FlowLabs is hiring a Full-Stack Developer to build end-to-end features across our SaaS platform. You'll work with Next.js on the frontend and Node.js + MongoDB on the backend.`,
+        whatYoullDo: [
+            'Build full-stack features from database to UI using Next.js and Node.js.',
+            'Design and optimize MongoDB schemas for high-performance queries.',
+            'Participate in code reviews and contribute to architectural decisions.',
+        ],
+        whyCompany: [
+            'Modern Stack: Next.js 14, Node.js 20, MongoDB Atlas.',
+            'Small Team: High ownership and direct impact on the product.',
+            'Compensation: $125k–$165k + equity and unlimited PTO.',
+        ],
+    },
+    {
+        id: 10,
+        initials: 'VP',
+        color: '#8b5cf6',
+        title: 'Technical Writer',
+        company: 'VerbPro',
+        location: 'Remote',
+        timeAgo: '2d ago',
+        type: 'Contract',
+        tags: ['Documentation', 'API Docs', 'Markdown'],
+        salary: '$70k-$95k',
+        position: 'Technical Writer',
+        description: `VerbPro is seeking a Technical Writer to create clear, developer-friendly documentation for our API platform. You'll write guides, tutorials, and API references.`,
+        whatYoullDo: [
+            'Write and maintain API reference documentation and developer guides.',
+            'Create tutorials and onboarding content for new users.',
+            'Work with engineering to keep docs accurate as features evolve.',
+        ],
+        whyCompany: [
+            'Audience: Your docs will be read by 100k+ developers monthly.',
+            'Flexibility: Fully remote with async-first workflow.',
+            'Compensation: $70k–$95k with contract renewal options.',
+        ],
+    },
+    {
+        id: 11,
+        initials: 'BF',
+        color: '#f59e0b',
+        title: 'Cybersecurity Analyst',
+        company: 'ByteFortress',
+        location: 'Washington, DC',
+        timeAgo: '4d ago',
+        type: 'Full-time',
+        tags: ['Security', 'SIEM', 'Penetration Testing'],
+        salary: '$100k-$140k',
+        position: 'Cybersecurity Analyst',
+        description: `ByteFortress is hiring a Cybersecurity Analyst to protect critical infrastructure for government and enterprise clients. You'll conduct threat analysis and penetration testing.`,
+        whatYoullDo: [
+            'Monitor and analyze security events using SIEM tools.',
+            'Conduct penetration tests and vulnerability assessments.',
+            'Develop incident response plans and security documentation.',
+        ],
+        whyCompany: [
+            'Mission-Critical: Protect high-value government systems.',
+            'Clearance: Company sponsors security clearance if needed.',
+            'Compensation: $100k–$140k + clearance bonus and benefits.',
+        ],
+    },
+    {
+        id: 12,
+        initials: 'GW',
+        color: '#2a5a6e',
+        title: 'Game Developer (Unity)',
+        company: 'GridWorks',
+        location: 'San Diego, CA',
+        timeAgo: '1w ago',
+        type: 'Full-time',
+        tags: ['Unity', 'C#', '3D Graphics'],
+        salary: '$95k-$130k',
+        position: 'Game Developer',
+        description: `GridWorks is looking for a Unity Game Developer to create immersive 3D experiences. You'll build gameplay systems, optimize rendering, and work closely with artists and designers.`,
+        whatYoullDo: [
+            'Develop gameplay mechanics and systems in Unity with C#.',
+            'Optimize 3D rendering and performance for multiple platforms.',
+            'Collaborate with artists and designers to bring creative visions to life.',
+        ],
+        whyCompany: [
+            'Creative: Work on original IP with a passionate team.',
+            'Tech: Latest Unity LTS with custom tooling and pipelines.',
+            'Compensation: $95k–$130k + profit sharing on shipped titles.',
+        ],
+    },
+    {
+        id: 13,
+        initials: 'EM',
+        color: '#0d9488',
+        title: 'Marketing Analyst',
+        company: 'EchoMetrics',
+        location: 'Miami, FL',
+        timeAgo: '5d ago',
+        type: 'Part-time',
+        tags: ['SQL', 'Google Analytics', 'Tableau'],
+        salary: '$55k-$75k',
+        position: 'Marketing Analyst',
+        description: `EchoMetrics needs a Marketing Analyst to turn campaign data into actionable insights. You'll build dashboards, run A/B tests, and optimize marketing spend across channels.`,
+        whatYoullDo: [
+            'Build and maintain marketing dashboards in Tableau and Google Analytics.',
+            'Analyze campaign performance and recommend budget optimizations.',
+            'Run A/B tests and report on conversion funnel metrics.',
+        ],
+        whyCompany: [
+            'Data-Driven: Marketing decisions backed by real analytics.',
+            'Flexibility: Part-time role with potential to go full-time.',
+            'Compensation: $55k–$75k pro-rated + performance bonuses.',
+        ],
+    },
+    {
+        id: 14,
+        initials: 'SF',
+        color: '#1e3a4f',
+        title: 'Solutions Architect',
+        company: 'StackForge',
+        location: 'Denver, CO',
+        timeAgo: '3d ago',
+        type: 'Full-time',
+        tags: ['AWS', 'System Design', 'Microservices'],
+        salary: '$150k-$200k',
+        position: 'Solutions Architect',
+        description: `StackForge is seeking a Solutions Architect to design scalable cloud architectures for enterprise clients. You'll lead technical discovery, create architecture diagrams, and guide engineering teams.`,
+        whatYoullDo: [
+            'Design and document cloud-native architectures on AWS.',
+            'Lead technical discovery sessions with clients and stakeholders.',
+            'Guide engineering teams on microservices patterns and best practices.',
+        ],
+        whyCompany: [
+            'Seniority: Operate at the highest technical level in the org.',
+            'Variety: Work across industries from fintech to healthcare.',
+            'Compensation: $150k–$200k + consulting bonuses and equity.',
+        ],
+    },
+    {
+        id: 15,
+        initials: 'PS',
+        color: '#ec4899',
+        title: 'Graphic Designer',
+        company: 'PixelShift',
+        location: 'Remote',
+        timeAgo: '6d ago',
+        type: 'Contract',
+        tags: ['Photoshop', 'Illustrator', 'Branding'],
+        salary: '$60k-$85k',
+        position: 'Graphic Designer',
+        description: `PixelShift is hiring a Graphic Designer to create stunning visual assets for tech startups. You'll work on branding, social media graphics, and marketing materials.`,
+        whatYoullDo: [
+            'Design brand identities including logos, color systems, and guidelines.',
+            'Create social media graphics, ads, and marketing collateral.',
+            'Collaborate with clients to iterate on concepts and deliver final assets.',
+        ],
+        whyCompany: [
+            'Variety: Work with multiple exciting startup brands.',
+            'Creative Freedom: Strong emphasis on original, boundary-pushing design.',
+            'Compensation: $60k–$85k with contract extensions available.',
+        ],
+    },
 ];
 
 // Collect all unique tags from jobs
 const ALL_TAGS = Array.from(new Set(JOBS.flatMap((j) => j.tags)));
-const COMPANIES = ['TechNova', 'DataStream', 'CreativeHub', 'CloudScale'];
+const COMPANIES = Array.from(new Set(JOBS.map((j) => j.company))).sort();
 const DATE_FILTERS = ['All Time', 'Today', 'This Week', 'This Month'];
 
 const APPLY_STEPS = [
@@ -237,10 +501,10 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 <div className="flex flex-col items-center">
                                     <div
                                         className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${step > s.id
-                                                ? 'bg-[#3CD894] text-white shadow-md shadow-[#3CD894]/30'
-                                                : step === s.id
-                                                    ? 'bg-[#1e3a4f] text-white shadow-md shadow-[#1e3a4f]/30'
-                                                    : 'bg-[#f0f2f5] text-[#9ca3af]'
+                                            ? 'bg-[#3CD894] text-white shadow-md shadow-[#3CD894]/30'
+                                            : step === s.id
+                                                ? 'bg-[#1e3a4f] text-white shadow-md shadow-[#1e3a4f]/30'
+                                                : 'bg-[#f0f2f5] text-[#9ca3af]'
                                             }`}
                                     >
                                         {step > s.id ? (
@@ -355,10 +619,10 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 onDrop={handleFileDrop}
                                 onClick={() => fileInputRef.current?.click()}
                                 className={`relative border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${dragOver
-                                        ? 'border-[#3CD894] bg-[#e6faf0]'
-                                        : selectedFile
-                                            ? 'border-[#3CD894] bg-[#f0fdf7]'
-                                            : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#3CD894] hover:bg-[#fafffe]'
+                                    ? 'border-[#3CD894] bg-[#e6faf0]'
+                                    : selectedFile
+                                        ? 'border-[#3CD894] bg-[#f0fdf7]'
+                                        : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#3CD894] hover:bg-[#fafffe]'
                                     }`}
                             >
                                 <input
@@ -556,8 +820,8 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                             onClick={handleNext}
                             disabled={!canGoNext()}
                             className={`flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all ${canGoNext()
-                                    ? 'hover:opacity-90 hover:shadow-lg shadow-md'
-                                    : 'opacity-50 cursor-not-allowed'
+                                ? 'hover:opacity-90 hover:shadow-lg shadow-md'
+                                : 'opacity-50 cursor-not-allowed'
                                 }`}
                             style={{ background: canGoNext() ? 'linear-gradient(135deg, #3CD894, #2bb87a)' : '#9ca3af' }}
                         >
@@ -707,6 +971,9 @@ export default function UserDashboardPage() {
     const { isLoading, logout } = useAuth();
     const [visibleIds, setVisibleIds] = useState<number[]>([]);
     const prevFilteredIds = useRef<number[]>([]);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [showAllSkills, setShowAllSkills] = useState(false);
+    const [showAllCompanies, setShowAllCompanies] = useState(false);
 
     useEffect(() => { document.title = 'Dashboard | AVAA'; }, []);
 
@@ -787,16 +1054,7 @@ export default function UserDashboardPage() {
         prevFilteredIds.current = JOBS.map((j) => j.id);
     }, []);
 
-    if (isLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
-                <div className="text-center">
-                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-[#5a6a75] text-sm">Loading...</p>
-                </div>
-            </div>
-        );
-    }
+    if (isLoading) return null;
 
     return (
         <div className="min-h-screen bg-[#f5f7fa]">
@@ -831,10 +1089,7 @@ export default function UserDashboardPage() {
                             <span className="hidden sm:inline">Settings</span>
                         </Link>
                         <button
-                            onClick={() => {
-                                localStorage.removeItem('token');
-                                router.push('/user/signin');
-                            }}
+                            onClick={() => setShowLogoutConfirm(true)}
                             className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
                         >
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -922,7 +1177,7 @@ export default function UserDashboardPage() {
                         <div className="mb-6">
                             <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Skills</h3>
                             <div className="flex flex-wrap gap-2">
-                                {ALL_TAGS.map((skill) => (
+                                {(showAllSkills ? ALL_TAGS : ALL_TAGS.slice(0, 6)).map((skill) => (
                                     <button
                                         key={skill}
                                         onClick={() => toggleSkill(skill)}
@@ -940,13 +1195,21 @@ export default function UserDashboardPage() {
                                     </button>
                                 ))}
                             </div>
+                            {ALL_TAGS.length > 6 && (
+                                <button
+                                    onClick={() => setShowAllSkills(!showAllSkills)}
+                                    className="mt-2 text-xs font-medium text-[#3CD894] hover:text-[#2bb87a] transition-colors"
+                                >
+                                    {showAllSkills ? 'Show Less' : `+${ALL_TAGS.length - 6} more`}
+                                </button>
+                            )}
                         </div>
 
                         {/* Company */}
                         <div>
                             <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Company</h3>
                             <div className="space-y-2">
-                                {COMPANIES.map((company) => (
+                                {(showAllCompanies ? COMPANIES : COMPANIES.slice(0, 4)).map((company) => (
                                     <label key={company} className="flex items-center gap-2.5 cursor-pointer group">
                                         <input
                                             type="checkbox"
@@ -958,6 +1221,14 @@ export default function UserDashboardPage() {
                                     </label>
                                 ))}
                             </div>
+                            {COMPANIES.length > 4 && (
+                                <button
+                                    onClick={() => setShowAllCompanies(!showAllCompanies)}
+                                    className="mt-2 text-xs font-medium text-[#3CD894] hover:text-[#2bb87a] transition-colors"
+                                >
+                                    {showAllCompanies ? 'Show Less' : `+${COMPANIES.length - 4} more`}
+                                </button>
+                            )}
                         </div>
 
                         {/* Clear Filters */}
@@ -984,7 +1255,7 @@ export default function UserDashboardPage() {
                         ? 'hidden lg:block lg:w-[340px] flex-shrink-0'
                         : 'flex-1'
                         }`}>
-                        <div className={`grid gap-5 ${selectedJob ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'}`}>
+                        <div className={`grid gap-5 ${selectedJob ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'}`}>
                             {filteredJobs.map((job, index) => (
                                 <JobCard
                                     key={job.id}
@@ -1360,6 +1631,36 @@ export default function UserDashboardPage() {
                     job={selectedJob}
                     onClose={() => setShowApplyModal(false)}
                 />
+            )}
+            {/* ─── Sign Out Confirmation Modal ─── */}
+            {showLogoutConfirm && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
+                    <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                            </div>
+                            <h3 className="text-lg font-bold text-[#1a1a1a] mb-1">Sign Out</h3>
+                            <p className="text-sm text-[#5a6a75] mb-6">Are you sure you want to sign out of your account?</p>
+                            <div className="flex gap-3 w-full">
+                                <button
+                                    onClick={() => setShowLogoutConfirm(false)}
+                                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#d1d5db] text-sm font-semibold text-[#5a6a75] hover:bg-[#f5f7fa] transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={() => { localStorage.removeItem('token'); router.push('/user/signin'); }}
+                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

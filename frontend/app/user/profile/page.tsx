@@ -5,33 +5,74 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/useAuth';
+import api from '@/lib/axios';
 
 export default function ProfilePage() {
-    const [fullName, setFullName] = useState('John Doe');
-    const [email, setEmail] = useState('john@example.com');
-    const [phone, setPhone] = useState('+1(555)123-4567');
-    const [location, setLocation] = useState('San Francisco, CA');
-    const [bio, setBio] = useState('Passionate full-stack developer with 5+ years of experience building scalable web applications.');
-    const [skills, setSkills] = useState(['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'AWS']);
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [location, setLocation] = useState('');
+    const [bio, setBio] = useState('');
+    const [skills, setSkills] = useState<string[]>([]);
     const [newSkill, setNewSkill] = useState('');
     const [isDragging, setIsDragging] = useState(false);
     const [resumeFile, setResumeFile] = useState<string | null>(null);
+    const [saving, setSaving] = useState(false);
+    const [saveSuccess, setSaveSuccess] = useState(false);
+    const [saveError, setSaveError] = useState('');
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
-    const { isLoading, logout } = useAuth();
+    const { isLoading, user, logout } = useAuth();
 
     useEffect(() => { document.title = 'Profile | AVAA'; }, []);
 
-    if (isLoading) {
-        return (
-            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
-                <div className="text-center">
-                    <div className="w-10 h-10 border-4 border-[#3CD894] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-[#5a6a75] text-sm">Loading...</p>
-                </div>
-            </div>
-        );
-    }
+    // Populate fields once auth user data is ready
+    useEffect(() => {
+        if (user) {
+            setFullName(user.name ?? '');
+            setEmail(user.email ?? '');
+            setPhone(user.phone ?? '');
+            setLocation(user.location ?? '');
+            setBio(user.bio ?? '');
+        }
+    }, [user]);
+
+    if (isLoading) return null;
+
+    const handleCancel = () => {
+        // Revert to original user data
+        if (user) {
+            setFullName(user.name ?? '');
+            setPhone(user.phone ?? '');
+            setLocation(user.location ?? '');
+            setBio(user.bio ?? '');
+        }
+        setIsEditing(false);
+        setSaveError('');
+    };
+
+    const handleSave = async () => {
+        setSaving(true);
+        setSaveError('');
+        setSaveSuccess(false);
+        try {
+            await api.put('/auth/profile', {
+                name: fullName,
+                phone: phone || null,
+                location: location || null,
+                bio: bio || null,
+            });
+            setSaveSuccess(true);
+            setIsEditing(false);
+            setTimeout(() => setSaveSuccess(false), 3000);
+        } catch (err: any) {
+            setSaveError(err.response?.data?.error || 'Failed to save changes. Please try again.');
+        } finally {
+            setSaving(false);
+        }
+    };
 
     const addSkill = () => {
         const trimmed = newSkill.trim();
@@ -64,6 +105,14 @@ export default function ProfilePage() {
         if (file) setResumeFile(file.name);
     };
 
+    // Generate initials avatar from name
+    const initials = fullName
+        .split(' ')
+        .map((w) => w[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+
     return (
         <div className="min-h-screen bg-[#f5f7fa]">
             {/* ─── Navbar ─── */}
@@ -94,7 +143,7 @@ export default function ProfilePage() {
                             <span className="hidden sm:inline">Settings</span>
                         </Link>
                         <button
-                            onClick={() => { localStorage.removeItem('token'); router.push('/user/signin'); }}
+                            onClick={() => setShowLogoutConfirm(true)}
                             className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
                         >
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -108,33 +157,54 @@ export default function ProfilePage() {
 
             {/* ─── Content ─── */}
             <div className="max-w-[780px] mx-auto px-6 py-8">
-                <h1 className="text-[28px] font-bold text-[#1a1a1a] mb-6">My Profile</h1>
+                <div className="flex items-center justify-between mb-6">
+                    <h1 className="text-[28px] font-bold text-[#1a1a1a]">My Profile</h1>
+                    {!isEditing && (
+                        <button
+                            onClick={() => setIsEditing(true)}
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
+                            style={{ background: '#3CD894' }}
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                            Edit Profile
+                        </button>
+                    )}
+                </div>
 
                 {/* ─── Avatar Card ─── */}
                 <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 mb-6 flex items-center gap-5">
-                    {/* Avatar */}
-                    <div className="w-20 h-20 rounded-full bg-[#d1d5db] flex items-center justify-center flex-shrink-0">
-                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
-                        </svg>
+                    {/* Avatar — shows initials if name exists */}
+                    <div className="w-20 h-20 rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-bold"
+                        style={{ background: initials ? 'linear-gradient(135deg, #1e3a4f, #2a5a6e)' : '#d1d5db' }}>
+                        {initials || (
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                            </svg>
+                        )}
                     </div>
                     <div>
-                        <h2 className="text-lg font-bold text-[#1a1a1a]">{fullName}</h2>
+                        <h2 className="text-lg font-bold text-[#1a1a1a]">{fullName || 'Your Name'}</h2>
                         <p className="text-sm text-[#5a6a75] mb-1">{email}</p>
-                        <button className="flex items-center gap-1.5 text-sm font-medium text-[#3CD894] hover:text-[#2bb574] transition-colors">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
-                            </svg>
-                            Upload Photo
-                        </button>
+                        {location && <p className="text-xs text-[#9ca3af]">{location}</p>}
                     </div>
-                    {/* Edit icon */}
-                    <button className="ml-auto text-[#9ca3af] hover:text-[#5a6a75] transition-colors p-2">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 20h9" /><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-                        </svg>
-                    </button>
                 </div>
+
+                {/* ─── Save feedback banner ─── */}
+                {saveSuccess && (
+                    <div className="mb-5 p-3.5 rounded-xl bg-[#e6faf0] border border-[#3CD894]/40 text-[#2bb87a] text-sm font-medium flex items-center gap-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Profile saved successfully!
+                    </div>
+                )}
+                {saveError && (
+                    <div className="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
+                        {saveError}
+                    </div>
+                )}
 
                 {/* ─── Personal Information ─── */}
                 <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 mb-6">
@@ -155,14 +225,21 @@ export default function ProfilePage() {
                                     type="text"
                                     value={fullName}
                                     onChange={(e) => setFullName(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
+                                    placeholder="Your full name"
                                 />
                             </div>
                         </div>
 
-                        {/* Email */}
+                        {/* Email — read-only (tied to account) */}
                         <div>
-                            <label htmlFor="profile-email" className="block text-sm font-semibold text-[#1a1a1a] mb-2">Email</label>
+                            <label htmlFor="profile-email" className="block text-sm font-semibold text-[#1a1a1a] mb-2">
+                                Email <span className="text-[11px] font-normal text-[#9ca3af] ml-1">(cannot be changed)</span>
+                            </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -173,8 +250,8 @@ export default function ProfilePage() {
                                     id="profile-email"
                                     type="email"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly
+                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#9ca3af] bg-[#f8fafc] cursor-not-allowed"
                                 />
                             </div>
                         </div>
@@ -193,7 +270,12 @@ export default function ProfilePage() {
                                     type="tel"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
+                                    placeholder="+63 912 345 6789"
                                 />
                             </div>
                         </div>
@@ -212,7 +294,12 @@ export default function ProfilePage() {
                                     type="text"
                                     value={location}
                                     onChange={(e) => setLocation(e.target.value)}
-                                    className="w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    readOnly={!isEditing}
+                                    className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
+                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        }`}
+                                    placeholder="City, Country"
                                 />
                             </div>
                         </div>
@@ -226,16 +313,21 @@ export default function ProfilePage() {
                             rows={3}
                             value={bio}
                             onChange={(e) => setBio(e.target.value)}
-                            className="w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
+                            readOnly={!isEditing}
+                            maxLength={500}
+                            className={`w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all resize-none ${isEditing
+                                    ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                    : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                }`}
+                            placeholder="Tell employers a bit about yourself..."
                         />
+                        {isEditing && <p className="text-right text-xs text-[#9ca3af] mt-1">{bio.length}/500</p>}
                     </div>
                 </div>
 
                 {/* ─── Skills ─── */}
                 <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 mb-6">
                     <h3 className="text-lg font-bold text-[#1a1a1a] mb-4">Skills</h3>
-
-                    {/* Skill chips */}
                     <div className="flex flex-wrap gap-2 mb-4">
                         {skills.map((skill) => (
                             <span
@@ -243,19 +335,17 @@ export default function ProfilePage() {
                                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-[#e6faf0] text-[#3CD894]"
                             >
                                 {skill}
-                                <button
-                                    onClick={() => removeSkill(skill)}
-                                    className="hover:text-red-500 transition-colors"
-                                >
+                                <button onClick={() => removeSkill(skill)} className="hover:text-red-500 transition-colors">
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                         <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
                                     </svg>
                                 </button>
                             </span>
                         ))}
+                        {skills.length === 0 && (
+                            <p className="text-sm text-[#9ca3af]">No skills added yet.</p>
+                        )}
                     </div>
-
-                    {/* Add skill input */}
                     <div className="flex gap-2">
                         <input
                             type="text"
@@ -308,19 +398,68 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                {/* ─── Save Button ─── */}
-                <div className="flex justify-end">
-                    <button
-                        className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg"
-                        style={{ background: '#3CD894' }}
-                    >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
-                        </svg>
-                        Save Changes
-                    </button>
-                </div>
+                {/* ─── Action Buttons ─── */}
+                {isEditing && (
+                    <div className="flex justify-end gap-3">
+                        <button
+                            onClick={handleCancel}
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl border border-[#d1d5db] text-sm font-semibold text-[#5a6a75] hover:bg-[#f5f7fa] transition-colors"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            style={{ background: '#3CD894' }}
+                        >
+                            {saving ? (
+                                <>
+                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                    Saving...
+                                </>
+                            ) : (
+                                <>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" />
+                                    </svg>
+                                    Save Changes
+                                </>
+                            )}
+                        </button>
+                    </div>
+                )}
             </div>
+            {/* ─── Sign Out Confirmation Modal ─── */}
+            {showLogoutConfirm && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
+                    <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                </svg>
+                            </div>
+                            <h3 className="text-lg font-bold text-[#1a1a1a] mb-1">Sign Out</h3>
+                            <p className="text-sm text-[#5a6a75] mb-6">Are you sure you want to sign out of your account?</p>
+                            <div className="flex gap-3 w-full">
+                                <button
+                                    onClick={() => setShowLogoutConfirm(false)}
+                                    className="flex-1 px-4 py-2.5 rounded-xl border border-[#d1d5db] text-sm font-semibold text-[#5a6a75] hover:bg-[#f5f7fa] transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={logout}
+                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

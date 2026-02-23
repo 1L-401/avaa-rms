@@ -17,6 +17,7 @@ Route::group([
     Route::post('refresh', [AuthController::class , 'refresh'])->middleware('auth:api');
     Route::post('me', [AuthController::class , 'me'])->middleware('auth:api');
     Route::put('profile', [AuthController::class , 'updateProfile'])->middleware('auth:api');
+    Route::put('change-password', [AuthController::class , 'changePassword'])->middleware('auth:api');
 });
 
 Route::group([

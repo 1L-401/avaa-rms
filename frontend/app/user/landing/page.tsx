@@ -210,13 +210,15 @@ export default function LandingPage() {
             {/* ═══════════════════════════════════
                 PARTNER LOGOS
                ═══════════════════════════════════ */}
-            <section className="border-y border-[#e5e7eb] bg-[#fafbfc]">
-                <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-6 flex items-center justify-center gap-10 md:gap-16 flex-wrap">
-                    {PARTNER_LOGOS.map((name) => (
-                        <span key={name} className="text-lg md:text-xl font-bold text-[#c4ccd4] tracking-wider select-none">
-                            {name}
-                        </span>
-                    ))}
+            <section className="border-y border-[#e5e7eb] bg-[#fafbfc] overflow-hidden">
+                <div className="relative py-6" style={{ maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}>
+                    <div className="flex gap-16 animate-[marquee_12s_linear_infinite] hover:[animation-play-state:paused] w-max">
+                        {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((name, i) => (
+                            <span key={`${name}-${i}`} className="text-lg md:text-xl font-bold text-[#c4ccd4] tracking-wider select-none whitespace-nowrap">
+                                {name}
+                            </span>
+                        ))}
+                    </div>
                 </div>
             </section>
 
@@ -523,6 +525,10 @@ export default function LandingPage() {
                 @keyframes float {
                     0%, 100% { transform: translateY(0); }
                     50% { transform: translateY(-8px); }
+                }
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
                 }
             `}</style>
         </div>

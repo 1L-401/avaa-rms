@@ -13,11 +13,11 @@ export default function AuthPromptModal({ isOpen, onClose }: AuthPromptModalProp
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+            <div className="absolute inset-0 z-0 bg-black/40 backdrop-blur-sm" />
 
             {/* Modal */}
             <div
-                className="relative bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-[modalIn_0.25s_ease-out]"
+                className="relative z-10 bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-[modalIn_0.25s_ease-out]"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Close */}

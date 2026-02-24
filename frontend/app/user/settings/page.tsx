@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -21,8 +21,24 @@ export default function SettingsPage() {
     const [saveSuccess, setSaveSuccess] = useState('');
     const [saveError, setSaveError] = useState('');
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const profileMenuRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const { isLoading, user, logout } = useAuth();
+
+    const userName = user?.name || 'User';
+    const userInitials = userName.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase() || 'U';
+    const userEmail = user?.email || '';
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+                setShowProfileMenu(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     useEffect(() => { document.title = 'Settings | AVAA'; }, []);
 
@@ -88,40 +104,103 @@ export default function SettingsPage() {
         <div className="min-h-screen bg-[#f5f7fa] page-enter">
             {/* ─── Navbar ─── */}
             <nav className="sticky top-0 z-30 bg-white border-b border-[#e5e7eb] px-6 lg:px-10">
-                <div className="flex items-center justify-between h-16 max-w-[1400px] mx-auto">
-                    <Link href="/user/dashboard" className="flex items-center gap-2.5">
-                        <Image src="/avaa_logo.png" alt="AVAA Logo" width={32} height={32} />
-                        <span className="text-lg font-bold text-[#1e3a4f] tracking-wide hidden sm:block">AVAA</span>
+                <div className="flex items-center justify-between h-20 max-w-[1400px] mx-auto">
+                    {/* Logo */}
+                    <Link href="/user/dashboard" className="flex items-center">
+                        <Image src="/AVAA Banner Borderless 1.png" alt="AVAA Logo" width={110} height={35} className="object-contain" />
                     </Link>
-                    <div className="flex items-center gap-2">
-                        <Link href="/user/dashboard" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3H8l-2 4h12l-2-4z" />
-                                </svg>
+
+                    {/* Nav Links */}
+                    <div className="flex items-center gap-3">
+                        <Link href="/user/dashboard" className="flex items-center gap-1.5 px-3 lg:px-5 py-2.5 rounded-lg text-[15px] font-semibold text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3H8l-2 4h12l-2-4z" />
+                            </svg>
                             <span className="hidden sm:inline">Jobs</span>
                         </Link>
-                        <Link href="/user/profile" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
+
+                        {/* Saved Jobs Button */}
+                        <button className="flex items-center gap-2 px-3 lg:px-5 py-2.5 rounded-lg border border-[#e5e7eb] text-[15px] font-semibold text-[#1a1a1a] bg-white hover:bg-[#f9fafb] shadow-sm transition-colors">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
                             </svg>
-                            <span className="hidden sm:inline">Profile</span>
-                        </Link>
-                        <button className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-semibold text-white"
-                            style={{ background: '#3CD894' }}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                            </svg>
-                            <span className="hidden sm:inline">Settings</span>
+                            <span className="hidden sm:inline">Saved Jobs</span>
                         </button>
-                        <button
-                            onClick={() => setShowLogoutConfirm(true)}
-                            className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
-                            </svg>
-                            <span className="hidden sm:inline">Sign Out</span>
-                        </button>
+
+                        <>
+                            {/* Notification Bell */}
+                            <div className="relative mx-1">
+                                <button className="p-2 text-[#5a6a75] hover:text-[#1a1a1a] hover:bg-[#f0f2f5] rounded-full transition-colors relative">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                    </svg>
+                                    <div className="absolute top-2 right-2.5 w-[7px] h-[7px] bg-red-500 rounded-full border-2 border-white"></div>
+                                </button>
+                            </div>
+                            <div className="w-px h-6 bg-[#e5e7eb] mx-1"></div>
+
+                            {/* Profile Dropdown */}
+                            <div className="relative" ref={profileMenuRef}>
+                                <button
+                                    onClick={() => setShowProfileMenu(!showProfileMenu)}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] hover:border-[#7EB0AB] transition-all ml-1 bg-[#e6f7f2] font-bold text-[#7EB0AB]"
+                                >
+                                    {userInitials}
+                                </button>
+
+                                {/* Dropdown Menu */}
+                                {showProfileMenu && (
+                                    <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-[#e5e7eb] overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200">
+                                        {/* User Info Header */}
+                                        <div className="p-4 border-b border-[#e5e7eb] flex items-center gap-3">
+                                            <div className="w-11 h-11 rounded-full flex items-center justify-center border border-[#7EB0AB] bg-[#e6f7f2] text-[#7EB0AB] font-bold text-lg">
+                                                {userInitials}
+                                            </div>
+                                            <div className="flex flex-col overflow-hidden">
+                                                <span className="text-[14px] font-bold text-[#1a1a1a] truncate">{userName}</span>
+                                                <span className="text-[12px] font-medium text-[#5a6a75] truncate">{userEmail}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="py-2">
+                                            <Link href="/user/profile" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                                </svg>
+                                                Account
+                                            </Link>
+                                            <button className="w-full flex items-center justify-between px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group text-left">
+                                                <div className="flex items-center gap-3">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                                    </svg>
+                                                    Dark Mode
+                                                </div>
+                                            </button>
+                                            <Link href="/user/settings" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group border-b border-[#f0f2f5] bg-[#e6f7f2] text-[#7EB0AB]">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#7EB0AB] group-hover:text-[#7EB0AB] transition-colors">
+                                                    <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                                                </svg>
+                                                Settings
+                                            </Link>
+
+                                            <div className="p-2">
+                                                <button
+                                                    onClick={() => { setShowProfileMenu(false); setShowLogoutConfirm(true); }}
+                                                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-bold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group"
+                                                >
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                                    </svg>
+                                                    Sign Out
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </>
                     </div>
                 </div>
             </nav>
@@ -146,8 +225,8 @@ export default function SettingsPage() {
                 {/* ─── Section 1: Account Info (read-only) ─── */}
                 <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 mb-6">
                     <div className="flex items-center gap-3 mb-5">
-                        <div className="w-10 h-10 rounded-full bg-[#e6faf0] flex items-center justify-center">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3CD894" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <div className="w-10 h-10 rounded-full bg-[#e6f7f2] flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7EB0AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
                             </svg>
                         </div>
@@ -200,7 +279,7 @@ export default function SettingsPage() {
                                     type={showCurrentPassword ? 'text' : 'password'}
                                     value={currentPassword}
                                     onChange={(e) => setCurrentPassword(e.target.value)}
-                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="Enter current password"
                                 />
                                 <button
@@ -222,7 +301,7 @@ export default function SettingsPage() {
                                     type={showNewPassword ? 'text' : 'password'}
                                     value={newPassword}
                                     onChange={(e) => setNewPassword(e.target.value)}
-                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="Enter new password (min 6 characters)"
                                 />
                                 <button
@@ -244,7 +323,7 @@ export default function SettingsPage() {
                                     type={showConfirmPassword ? 'text' : 'password'}
                                     value={confirmNewPassword}
                                     onChange={(e) => setConfirmNewPassword(e.target.value)}
-                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 pr-12 bg-[#f5f7fa] border border-[#e5e7eb] rounded-xl text-sm text-[#1a1a1a] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="Re-enter new password"
                                 />
                                 <button
@@ -280,7 +359,7 @@ export default function SettingsPage() {
                     <button
                         onClick={handleChangePassword}
                         disabled={saving || (!currentPassword && !newPassword)}
-                        className="flex items-center gap-2 px-6 py-3 bg-[#3CD894] hover:bg-[#2bb87a] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:ring-offset-2"
+                        className="flex items-center gap-2 px-6 py-3 bg-[#7EB0AB] hover:bg-[#6A9994] disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-xl transition-colors focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:ring-offset-2"
                     >
                         {saving ? (
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -301,8 +380,8 @@ export default function SettingsPage() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
                     <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <div className="w-14 h-14 rounded-full bg-[#e6f7f2] flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7EB0AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
                                 </svg>
                             </div>
@@ -317,7 +396,8 @@ export default function SettingsPage() {
                                 </button>
                                 <button
                                     onClick={logout}
-                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                    className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 shadow-md"
+                                    style={{ background: '#7EB0AB' }}
                                 >
                                     Sign Out
                                 </button>

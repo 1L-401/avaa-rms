@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import api from '@/lib/axios';
 
 export default function ForgotPasswordPage() {
@@ -29,37 +30,39 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa] px-4 page-enter">
-            <div className="w-full max-w-[480px]">
-                {/* Back to login */}
-                <Link
-                    href="/user/signin"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-[#5a6a75] hover:text-[#1e3a4f] transition-colors mb-8"
-                >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 12H5" />
-                        <path d="M12 19l-7-7 7-7" />
-                    </svg>
-                    Back to login
-                </Link>
+        <div className="flex min-h-screen items-center justify-center bg-[#DCE8E6] px-4 page-enter">
+            <div className="w-full max-w-[480px] bg-white rounded-2xl shadow-lg p-10">
+                {/* AVAA Logo */}
+                <div className="flex justify-center mb-6">
+                    <Image src="/avaa_logo.png" alt="AVAA Logo" width={80} height={80} priority />
+                </div>
 
                 {/* Heading */}
-                <h1 className="text-[28px] font-bold text-[#1a1a1a] mb-2">Forgot password?</h1>
-                <p className="text-[15px] text-[#5a6a75] mb-8">
+                <h1 className="text-[28px] font-bold text-[#1e3a4f] text-center mb-2">Forgot password?</h1>
+                <p className="text-[14px] text-[#5a6a75] text-center mb-8">
                     Enter your email and we&apos;ll send you reset instructions.
                 </p>
 
                 {/* Error Message */}
                 {error && (
-                    <div className="mb-5 p-3.5 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm">
-                        {error}
+                    <div className="mb-5 flex items-start gap-3 p-4 rounded-xl bg-[#FEF2F2] border-l-4 border-red-500 text-sm">
+                        <svg className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        <span className="text-red-700 font-medium">{error}</span>
                     </div>
                 )}
 
                 {/* Success Message */}
                 {success && (
-                    <div className="mb-5 p-3.5 rounded-lg bg-green-50 border border-green-200 text-green-600 text-sm">
-                        {success}
+                    <div className="mb-5 flex items-start gap-3 p-4 rounded-xl bg-green-50 border-l-4 border-green-500 text-sm">
+                        <svg className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg>
+                        <span className="text-green-700 font-medium">{success}</span>
                     </div>
                 )}
 
@@ -83,7 +86,7 @@ export default function ForgotPasswordPage() {
                                 placeholder="you@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                className="w-full pl-12 pr-4 py-3.5 border border-[#d1d5db] rounded-xl text-[15px] text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                 required
                             />
                         </div>
@@ -94,13 +97,19 @@ export default function ForgotPasswordPage() {
                         type="submit"
                         disabled={loading}
                         className="w-full py-3.5 rounded-xl text-white font-semibold text-[15px] transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                        style={{
-                            background: '#3CD894',
-                        }}
+                        style={{ background: '#7EB0AB' }}
                     >
                         {loading ? 'Sending...' : 'Send Reset Link'}
                     </button>
                 </form>
+
+                {/* Back to Sign In */}
+                <p className="text-center text-[14px] text-[#5a6a75] mt-6">
+                    Remember your password?{' '}
+                    <Link href="/user/signin" className="font-semibold text-[#7EB0AB] hover:text-[#6A9994] transition-colors">
+                        Sign in
+                    </Link>
+                </p>
             </div>
         </div>
     );

@@ -21,5 +21,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        // Seed default admin user
+        User::factory()->create([
+            'name' => 'AVAA Admin',
+            'email' => 'admin@avaa.com',
+            'password' => bcrypt('admin123'),
+            'role' => 'admin',
+            'email_verified_at' => now(),
+        ]);
     }
 }

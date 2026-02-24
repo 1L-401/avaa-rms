@@ -23,8 +23,24 @@ export default function ProfilePage() {
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const profileMenuRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
     const { isLoading, user, logout } = useAuth();
+
+    const userName = user?.name || 'User';
+    const userInitials = userName.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase() || 'U';
+    const userEmail = user?.email || '';
+
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+                setShowProfileMenu(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     useEffect(() => { document.title = 'Profile | AVAA'; }, []);
 
@@ -117,40 +133,103 @@ export default function ProfilePage() {
         <div className="min-h-screen bg-[#f5f7fa] page-enter">
             {/* ─── Navbar ─── */}
             <nav className="sticky top-0 z-30 bg-white border-b border-[#e5e7eb] px-6 lg:px-10">
-                <div className="flex items-center justify-between h-16 max-w-[1400px] mx-auto">
-                    <Link href="/user/dashboard" className="flex items-center gap-2.5">
-                        <Image src="/avaa_logo.png" alt="AVAA Logo" width={32} height={32} />
-                        <span className="text-lg font-bold text-[#1e3a4f] tracking-wide hidden sm:block">AVAA</span>
+                <div className="flex items-center justify-between h-20 max-w-[1400px] mx-auto">
+                    {/* Logo */}
+                    <Link href="/user/dashboard" className="flex items-center">
+                        <Image src="/AVAA Banner Borderless 1.png" alt="AVAA Logo" width={110} height={35} className="object-contain" />
                     </Link>
-                    <div className="flex items-center gap-2">
-                        <Link href="/user/dashboard" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+
+                    {/* Nav Links */}
+                    <div className="flex items-center gap-3">
+                        <Link href="/user/dashboard" className="flex items-center gap-1.5 px-3 lg:px-5 py-2.5 rounded-lg text-[15px] font-semibold text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3H8l-2 4h12l-2-4z" />
                             </svg>
                             <span className="hidden sm:inline">Jobs</span>
                         </Link>
-                        <button className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-semibold text-white"
-                            style={{ background: '#3CD894' }}>
+
+                        {/* Saved Jobs Button */}
+                        <button className="flex items-center gap-2 px-3 lg:px-5 py-2.5 rounded-lg border border-[#e5e7eb] text-[15px] font-semibold text-[#1a1a1a] bg-white hover:bg-[#f9fafb] shadow-sm transition-colors">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
                             </svg>
-                            <span className="hidden sm:inline">Profile</span>
+                            <span className="hidden sm:inline">Saved Jobs</span>
                         </button>
-                        <Link href="/user/settings" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                            </svg>
-                            <span className="hidden sm:inline">Settings</span>
-                        </Link>
-                        <button
-                            onClick={() => setShowLogoutConfirm(true)}
-                            className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
-                        >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
-                            </svg>
-                            <span className="hidden sm:inline">Sign Out</span>
-                        </button>
+
+                        <>
+                            {/* Notification Bell */}
+                            <div className="relative mx-1">
+                                <button className="p-2 text-[#5a6a75] hover:text-[#1a1a1a] hover:bg-[#f0f2f5] rounded-full transition-colors relative">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                    </svg>
+                                    <div className="absolute top-2 right-2.5 w-[7px] h-[7px] bg-red-500 rounded-full border-2 border-white"></div>
+                                </button>
+                            </div>
+                            <div className="w-px h-6 bg-[#e5e7eb] mx-1"></div>
+
+                            {/* Profile Dropdown */}
+                            <div className="relative" ref={profileMenuRef}>
+                                <button
+                                    onClick={() => setShowProfileMenu(!showProfileMenu)}
+                                    className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] hover:border-[#7EB0AB] transition-all ml-1 bg-[#e6f7f2] font-bold text-[#7EB0AB]"
+                                >
+                                    {userInitials}
+                                </button>
+
+                                {/* Dropdown Menu */}
+                                {showProfileMenu && (
+                                    <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-[#e5e7eb] overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200">
+                                        {/* User Info Header */}
+                                        <div className="p-4 border-b border-[#e5e7eb] flex items-center gap-3">
+                                            <div className="w-11 h-11 rounded-full flex items-center justify-center border border-[#7EB0AB] bg-[#e6f7f2] text-[#7EB0AB] font-bold text-lg">
+                                                {userInitials}
+                                            </div>
+                                            <div className="flex flex-col overflow-hidden">
+                                                <span className="text-[14px] font-bold text-[#1a1a1a] truncate">{userName}</span>
+                                                <span className="text-[12px] font-medium text-[#5a6a75] truncate">{userEmail}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="py-2">
+                                            <Link href="/user/profile" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group border-b border-[#f0f2f5] bg-[#e6f7f2] text-[#7EB0AB]">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#7EB0AB] group-hover:text-[#7EB0AB] transition-colors">
+                                                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                                </svg>
+                                                Account
+                                            </Link>
+                                            <button className="w-full flex items-center justify-between px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group text-left">
+                                                <div className="flex items-center gap-3">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                                    </svg>
+                                                    Dark Mode
+                                                </div>
+                                            </button>
+                                            <Link href="/user/settings" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                    <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                                                </svg>
+                                                Settings
+                                            </Link>
+
+                                            <div className="p-2">
+                                                <button
+                                                    onClick={() => { setShowProfileMenu(false); setShowLogoutConfirm(true); }}
+                                                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-bold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group"
+                                                >
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                                    </svg>
+                                                    Sign Out
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </>
                     </div>
                 </div>
             </nav>
@@ -163,7 +242,7 @@ export default function ProfilePage() {
                         <button
                             onClick={() => setIsEditing(true)}
                             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
-                            style={{ background: '#3CD894' }}
+                            style={{ background: '#7EB0AB' }}
                         >
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
@@ -193,7 +272,7 @@ export default function ProfilePage() {
 
                 {/* ─── Save feedback banner ─── */}
                 {saveSuccess && (
-                    <div className="mb-5 p-3.5 rounded-xl bg-[#e6faf0] border border-[#3CD894]/40 text-[#2bb87a] text-sm font-medium flex items-center gap-2">
+                    <div className="mb-5 p-3.5 rounded-xl bg-[#e6f7f2] border border-[#7EB0AB]/40 text-[#6A9994] text-sm font-medium flex items-center gap-2">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -227,7 +306,7 @@ export default function ProfilePage() {
                                     onChange={(e) => setFullName(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent'
                                         : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="Your full name"
@@ -272,7 +351,7 @@ export default function ProfilePage() {
                                     onChange={(e) => setPhone(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent'
                                         : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="+63 912 345 6789"
@@ -296,7 +375,7 @@ export default function ProfilePage() {
                                     onChange={(e) => setLocation(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent'
                                         : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="City, Country"
@@ -316,7 +395,7 @@ export default function ProfilePage() {
                             readOnly={!isEditing}
                             maxLength={500}
                             className={`w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all resize-none ${isEditing
-                                ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent'
                                 : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                 }`}
                             placeholder="Tell employers a bit about yourself..."
@@ -332,7 +411,7 @@ export default function ProfilePage() {
                         {skills.map((skill) => (
                             <span
                                 key={skill}
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-[#e6faf0] text-[#3CD894]"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-[#e6f7f2] text-[#7EB0AB]"
                             >
                                 {skill}
                                 <button onClick={() => removeSkill(skill)} className="hover:text-red-500 transition-colors">
@@ -353,7 +432,7 @@ export default function ProfilePage() {
                             value={newSkill}
                             onChange={(e) => setNewSkill(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            className="flex-1 px-4 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                            className="flex-1 px-4 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                         />
                         <button
                             onClick={addSkill}
@@ -373,7 +452,7 @@ export default function ProfilePage() {
                         onDrop={handleDrop}
                         onClick={() => fileInputRef.current?.click()}
                         className={`flex flex-col items-center justify-center py-10 px-6 rounded-2xl border-2 border-dashed cursor-pointer transition-all ${isDragging
-                            ? 'border-[#3CD894] bg-[#e6faf0]'
+                            ? 'border-[#7EB0AB] bg-[#e6f7f2]'
                             : 'border-[#d1d5db] bg-white hover:border-[#9ca3af]'
                             }`}
                     >
@@ -392,7 +471,7 @@ export default function ProfilePage() {
                         ) : (
                             <>
                                 <p className="text-sm text-[#5a6a75] mb-1">Drag and drop your resume, or click to browse</p>
-                                <span className="text-sm font-semibold text-[#3CD894]">Upload Resume</span>
+                                <span className="text-sm font-semibold text-[#7EB0AB]">Upload Resume</span>
                             </>
                         )}
                     </div>
@@ -411,7 +490,7 @@ export default function ProfilePage() {
                             onClick={handleSave}
                             disabled={saving}
                             className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-semibold text-sm transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                            style={{ background: '#3CD894' }}
+                            style={{ background: '#7EB0AB' }}
                         >
                             {saving ? (
                                 <>
@@ -435,8 +514,8 @@ export default function ProfilePage() {
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
                     <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <div className="w-14 h-14 rounded-full bg-[#e6f7f2] flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7EB0AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
                                 </svg>
                             </div>
@@ -451,7 +530,8 @@ export default function ProfilePage() {
                                 </button>
                                 <button
                                     onClick={logout}
-                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                    className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 shadow-md"
+                                    style={{ background: '#7EB0AB' }}
                                 >
                                     Sign Out
                                 </button>

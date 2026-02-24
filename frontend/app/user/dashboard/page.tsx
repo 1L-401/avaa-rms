@@ -35,7 +35,7 @@ const JOBS = [
     {
         id: 2,
         initials: 'DS',
-        color: '#3CD894',
+        color: '#7EB0AB',
         title: 'Backend Engineer',
         company: 'DataStream',
         location: 'New York, NY',
@@ -203,7 +203,7 @@ const JOBS = [
     {
         id: 9,
         initials: 'FL',
-        color: '#3CD894',
+        color: '#7EB0AB',
         title: 'Full-Stack Developer',
         company: 'FlowLabs',
         location: 'Seattle, WA',
@@ -458,7 +458,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                 <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl p-8 text-center"
                     style={{ animation: 'fadeInScale 0.3s ease-out' }}>
                     <div className="w-16 h-16 rounded-full bg-[#e6faf0] flex items-center justify-center mx-auto mb-5">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3CD894" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7EB0AB" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="20 6 9 17 4 12" />
                         </svg>
                     </div>
@@ -469,7 +469,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                     <button
                         onClick={onClose}
                         className="px-8 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg"
-                        style={{ background: 'linear-gradient(135deg, #3CD894, #2bb87a)' }}
+                        style={{ background: 'linear-gradient(135deg, #7EB0AB, #6A9994)' }}
                     >
                         Done
                     </button>
@@ -502,7 +502,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 <div className="flex flex-col items-center">
                                     <div
                                         className={`w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300 ${step > s.id
-                                            ? 'bg-[#3CD894] text-white shadow-md shadow-[#3CD894]/30'
+                                            ? 'bg-[#7EB0AB] text-white shadow-md shadow-[#7EB0AB]/30'
                                             : step === s.id
                                                 ? 'bg-[#1e3a4f] text-white shadow-md shadow-[#1e3a4f]/30'
                                                 : 'bg-[#f0f2f5] text-[#9ca3af]'
@@ -526,7 +526,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     <div className="flex-1 mx-2 mb-5">
                                         <div className="h-[2px] rounded-full bg-[#e5e7eb] relative overflow-hidden">
                                             <div
-                                                className="absolute inset-y-0 left-0 bg-[#3CD894] rounded-full transition-all duration-500"
+                                                className="absolute inset-y-0 left-0 bg-[#7EB0AB] rounded-full transition-all duration-500"
                                                 style={{ width: step > s.id ? '100%' : '0%' }}
                                             />
                                         </div>
@@ -549,7 +549,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                         <p className="text-sm font-bold text-[#1a1a1a] truncate">{job.title}</p>
                         <p className="text-xs text-[#5a6a75] truncate">{job.company} &bull; {job.location}</p>
                     </div>
-                    <svg className="ml-auto flex-shrink-0 text-[#3CD894]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="ml-auto flex-shrink-0 text-[#7EB0AB]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                     </svg>
                 </div>
@@ -569,7 +569,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     type="text"
                                     value={form.fullName}
                                     onChange={(e) => updateField('fullName', e.target.value)}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="e.g. Juan Dela Cruz"
                                 />
                             </div>
@@ -581,7 +581,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     type="email"
                                     value={form.email}
                                     onChange={(e) => updateField('email', e.target.value)}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="juan@example.com"
                                 />
                             </div>
@@ -591,7 +591,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     type="tel"
                                     value={form.phone}
                                     onChange={(e) => updateField('phone', e.target.value)}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="+63 912 345 6789"
                                 />
                             </div>
@@ -601,7 +601,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     type="url"
                                     value={form.linkedin}
                                     onChange={(e) => updateField('linkedin', e.target.value)}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
                                     placeholder="https://linkedin.com/in/yourprofile"
                                 />
                             </div>
@@ -620,10 +620,10 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 onDrop={handleFileDrop}
                                 onClick={() => fileInputRef.current?.click()}
                                 className={`relative border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${dragOver
-                                    ? 'border-[#3CD894] bg-[#e6faf0]'
+                                    ? 'border-[#7EB0AB] bg-[#e6faf0]'
                                     : selectedFile
-                                        ? 'border-[#3CD894] bg-[#f0fdf7]'
-                                        : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#3CD894] hover:bg-[#fafffe]'
+                                        ? 'border-[#7EB0AB] bg-[#f0fdf7]'
+                                        : 'border-[#d1d5db] bg-[#f9fafb] hover:border-[#7EB0AB] hover:bg-[#fafffe]'
                                     }`}
                             >
                                 <input
@@ -656,7 +656,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     </div>
                                 ) : (
                                     <>
-                                        <svg className="mx-auto h-10 w-10 text-[#3CD894] mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg className="mx-auto h-10 w-10 text-[#7EB0AB] mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                         </svg>
                                         <p className="text-sm font-semibold text-[#1a1a1a]">Tap to browse files</p>
@@ -676,7 +676,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     onChange={(e) => updateField('coverLetter', e.target.value)}
                                     rows={4}
                                     maxLength={500}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all resize-none"
                                     placeholder="Introduce yourself and explain why you're a good fit for this role..."
                                 />
                                 <p className="text-right text-xs text-[#9ca3af] mt-1">{form.coverLetter.length}/500</p>
@@ -696,7 +696,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     value={form.whyInterested}
                                     onChange={(e) => updateField('whyInterested', e.target.value)}
                                     rows={4}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all resize-none"
                                     placeholder="Share what excites you about this position..."
                                 />
                             </div>
@@ -708,7 +708,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                     value={form.experience}
                                     onChange={(e) => updateField('experience', e.target.value)}
                                     rows={4}
-                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all resize-none"
+                                    className="w-full px-3.5 py-2.5 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all resize-none"
                                     placeholder="Highlight any projects or skills that are relevant..."
                                 />
                             </div>
@@ -724,7 +724,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                             <div className="bg-[#f8fafc] border border-[#e5e7eb] rounded-xl p-4 space-y-2">
                                 <div className="flex items-center justify-between mb-1">
                                     <h5 className="text-xs font-bold text-[#5a6a75] uppercase tracking-wider">Personal Info</h5>
-                                    <button onClick={() => setStep(1)} className="text-xs font-semibold text-[#3CD894] hover:underline">Edit</button>
+                                    <button onClick={() => setStep(1)} className="text-xs font-semibold text-[#7EB0AB] hover:underline">Edit</button>
                                 </div>
                                 <div className="grid grid-cols-2 gap-2 text-sm">
                                     <div>
@@ -754,7 +754,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                             <div className="bg-[#f8fafc] border border-[#e5e7eb] rounded-xl p-4 space-y-2">
                                 <div className="flex items-center justify-between mb-1">
                                     <h5 className="text-xs font-bold text-[#5a6a75] uppercase tracking-wider">Resume</h5>
-                                    <button onClick={() => setStep(2)} className="text-xs font-semibold text-[#3CD894] hover:underline">Edit</button>
+                                    <button onClick={() => setStep(2)} className="text-xs font-semibold text-[#7EB0AB] hover:underline">Edit</button>
                                 </div>
                                 {selectedFile && (
                                     <div className="flex items-center gap-2">
@@ -778,7 +778,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                             <div className="bg-[#f8fafc] border border-[#e5e7eb] rounded-xl p-4 space-y-2">
                                 <div className="flex items-center justify-between mb-1">
                                     <h5 className="text-xs font-bold text-[#5a6a75] uppercase tracking-wider">Q&A</h5>
-                                    <button onClick={() => setStep(3)} className="text-xs font-semibold text-[#3CD894] hover:underline">Edit</button>
+                                    <button onClick={() => setStep(3)} className="text-xs font-semibold text-[#7EB0AB] hover:underline">Edit</button>
                                 </div>
                                 <div>
                                     <p className="text-[11px] text-[#9ca3af] mb-0.5">Why interested?</p>
@@ -824,7 +824,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                                 ? 'hover:opacity-90 hover:shadow-lg shadow-md'
                                 : 'opacity-50 cursor-not-allowed'
                                 }`}
-                            style={{ background: canGoNext() ? 'linear-gradient(135deg, #3CD894, #2bb87a)' : '#9ca3af' }}
+                            style={{ background: canGoNext() ? 'linear-gradient(135deg, #7EB0AB, #6A9994)' : '#9ca3af' }}
                         >
                             Next Step
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -835,7 +835,7 @@ function ApplyModal({ job, onClose }: { job: typeof JOBS[0]; onClose: () => void
                         <button
                             onClick={handleSubmit}
                             className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-lg shadow-md"
-                            style={{ background: 'linear-gradient(135deg, #3CD894, #2bb87a)' }}
+                            style={{ background: 'linear-gradient(135deg, #7EB0AB, #6A9994)' }}
                         >
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M22 2L11 13" /><path d="M22 2l-7 20-4-9-9-4 20-7z" />
@@ -889,7 +889,7 @@ function JobCard({
                 transition: 'opacity 0.35s ease, transform 0.35s ease, box-shadow 0.2s ease, border-color 0.2s ease',
             }}
             className={`bg-white rounded-2xl border p-5 hover:shadow-lg group cursor-pointer ${isSelected
-                ? 'border-[#3CD894] shadow-md'
+                ? 'border-[#7EB0AB] shadow-md'
                 : 'border-[#e5e7eb] hover:border-[#c5ccd3]'
                 }`}
         >
@@ -928,7 +928,7 @@ function JobCard({
                     {job.timeAgo}
                 </span>
                 <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${job.type === 'Full-time'
-                    ? 'bg-[#e6f7f2] text-[#3CD894]'
+                    ? 'bg-[#e6f7f2] text-[#7EB0AB]'
                     : 'bg-[#fef3e2] text-[#b8860b]'
                     }`}>
                     {job.type}
@@ -936,24 +936,35 @@ function JobCard({
             </div>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-4">
-                {job.tags.map((tag) => (
+            <div className="flex flex-wrap gap-2 mb-6 mt-1">
+                {job.tags.slice(0, 3).map((tag) => (
                     <span
                         key={tag}
-                        className="px-2.5 py-1 rounded-md text-[12px] font-medium bg-[#f0f2f5] text-[#5a6a75]"
+                        className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#e5e7eb] text-[#5a6a75] border border-transparent hover:border-[#d1d5db] transition-colors"
                     >
                         {tag}
                     </span>
                 ))}
+                {job.tags.length > 3 && (
+                    <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[#f0f2f5] text-[#9ca3af]">
+                        +{job.tags.length - 3}
+                    </span>
+                )}
             </div>
 
             {/* Bottom Row */}
-            <div className="flex items-center justify-between">
-                <span className="text-[15px] font-bold text-[#1a1a1a]">{job.salary}</span>
-                <span className="text-[13px] font-semibold text-[#3CD894] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    View Details
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-                </span>
+            <div className="flex items-center justify-between border-t border-[#f0f2f5] pt-4 mt-auto">
+                <div>
+                    <span className="block text-[11px] font-medium text-[#9ca3af] mb-0.5">Salary Range</span>
+                    <span className="text-[14px] font-bold text-[#1e3a4f] group-hover:text-[#7EB0AB] transition-colors">{job.salary}</span>
+                </div>
+                <button
+                    onClick={(e) => { e.stopPropagation(); onSelect(); }}
+                    className="flex justify-center flex-1 ml-4 py-2 rounded-lg text-[13px] font-semibold text-white transition-all shadow-sm"
+                    style={{ background: '#7EB0AB' }}
+                >
+                    Apply Now
+                </button>
             </div>
         </div>
     );
@@ -961,6 +972,26 @@ function JobCard({
 
 export default function UserDashboardPage() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [sliding, setSliding] = useState(false);
+    const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
+    const [activeView, setActiveView] = useState<'grid' | 'details'>('grid');
+    const [lastSelectedJob, setLastSelectedJob] = useState<typeof JOBS[0] | null>(null);
+
+    const handleSelectJob = (job: typeof JOBS[0]) => {
+        if (job.id === lastSelectedJob?.id && activeView === 'details') return;
+        setLastSelectedJob(job);
+        setSelectedJob(job);
+        // Slide container to the left (showing right half)
+        setActiveView('details');
+    };
+
+    const handleClearSelection = () => {
+        if (activeView === 'grid') return;
+        // Slide container to the right (showing left half)
+        setActiveView('grid');
+        // Optionally clear selectedJob after animation completes, but we can just keep it mounted.
+        setTimeout(() => setSelectedJob(null), 500);
+    };
     const [activeDateFilter, setActiveDateFilter] = useState('All Time');
     const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
     const [selectedCompanies, setSelectedCompanies] = useState<string[]>([]);
@@ -969,13 +1000,29 @@ export default function UserDashboardPage() {
     const [showMobileFilters, setShowMobileFilters] = useState(false);
     const [showApplyModal, setShowApplyModal] = useState(false);
     const router = useRouter();
-    const { isLoading, isAuthenticated, logout } = useAuth({ redirect: false });
+    const { isLoading, isAuthenticated, logout, user } = useAuth({ redirect: false });
+    const userName = user?.name || 'User';
+    const userInitials = userName.split(' ').map((n: string) => n[0]).slice(0, 2).join('').toUpperCase() || 'U';
+    const userEmail = user?.email || '';
     const [visibleIds, setVisibleIds] = useState<number[]>([]);
     const prevFilteredIds = useRef<number[]>([]);
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const [showAllSkills, setShowAllSkills] = useState(false);
     const [showAllCompanies, setShowAllCompanies] = useState(false);
+    const [showProfileMenu, setShowProfileMenu] = useState(false);
+    const profileMenuRef = useRef<HTMLDivElement>(null);
     const [showAuthPrompt, setShowAuthPrompt] = useState(false);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event: MouseEvent) {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+                setShowProfileMenu(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     useEffect(() => { document.title = 'Dashboard | AVAA'; }, []);
 
@@ -1059,52 +1106,111 @@ export default function UserDashboardPage() {
     if (isLoading) return null;
 
     return (
-        <div className="min-h-screen bg-[#f5f7fa] page-enter">
+        <div className="min-h-screen bg-[#f5f7fa] page-enter overflow-x-hidden">
             {/* ─── Navbar ─── */}
             <nav className="sticky top-0 z-30 bg-white border-b border-[#e5e7eb] px-6 lg:px-10">
-                <div className="flex items-center justify-between h-16 max-w-[1400px] mx-auto">
+                <div className="flex items-center justify-between h-20 max-w-[1400px] mx-auto">
                     {/* Logo */}
-                    <Link href="/user/dashboard" className="flex items-center gap-2.5">
-                        <Image src="/avaa_logo.png" alt="AVAA Logo" width={32} height={32} />
-                        <span className="text-lg font-bold text-[#1e3a4f] tracking-wide hidden sm:block">AVAA</span>
+                    <Link href="/user/dashboard" className="flex items-center">
+                        <Image src="/AVAA Banner Borderless 1.png" alt="AVAA Logo" width={110} height={35} className="object-contain" />
                     </Link>
 
                     {/* Nav Links */}
-                    <div className="flex items-center gap-2">
-                        <button className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-semibold text-white"
-                            style={{ background: '#3CD894' }}>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="flex items-center gap-3">
+                        <button className="flex items-center gap-1.5 px-3 lg:px-5 py-2.5 rounded-lg text-[15px] font-semibold text-white shadow-sm"
+                            style={{ background: '#7EB0AB' }}>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 3H8l-2 4h12l-2-4z" />
                             </svg>
                             Jobs
                         </button>
+
+                        {/* Saved Jobs Button */}
+                        <button className="flex items-center gap-2 px-3 lg:px-5 py-2.5 rounded-lg border border-[#e5e7eb] text-[15px] font-semibold text-[#1a1a1a] bg-white hover:bg-[#f9fafb] shadow-sm transition-colors">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                            </svg>
+                            Saved Jobs
+                        </button>
+
                         {isAuthenticated && (
                             <>
-                                <Link href="/user/profile" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
-                                    </svg>
-                                    <span className="hidden sm:inline">Profile</span>
-                                </Link>
-                                <Link href="/user/settings" className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-                                    </svg>
-                                    <span className="hidden sm:inline">Settings</span>
-                                </Link>
-                                <button
-                                    onClick={() => setShowLogoutConfirm(true)}
-                                    className="flex items-center gap-1.5 px-3 lg:px-4 py-2 rounded-full text-sm font-medium text-[#5a6a75] hover:bg-[#f0f2f5] transition-colors"
-                                >
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
-                                    </svg>
-                                    <span className="hidden sm:inline">Sign Out</span>
-                                </button>
+                                {/* Notification Bell */}
+                                <div className="relative mx-1">
+                                    <button className="p-2 text-[#5a6a75] hover:text-[#1a1a1a] hover:bg-[#f0f2f5] rounded-full transition-colors relative">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                                        </svg>
+                                        <div className="absolute top-2 right-2.5 w-[7px] h-[7px] bg-red-500 rounded-full border-2 border-white"></div>
+                                    </button>
+                                </div>
+                                <div className="w-px h-6 bg-[#e5e7eb] mx-1"></div>
+
+                                {/* Profile Dropdown */}
+                                <div className="relative" ref={profileMenuRef}>
+                                    <button
+                                        onClick={() => setShowProfileMenu(!showProfileMenu)}
+                                        className="w-10 h-10 rounded-full flex items-center justify-center border border-[#e5e7eb] focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] hover:border-[#7EB0AB] transition-all ml-1 bg-[#e6f7f2] font-bold text-[#7EB0AB]"
+                                    >
+                                        {userInitials}
+                                    </button>
+
+                                    {/* Dropdown Menu */}
+                                    {showProfileMenu && (
+                                        <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] border border-[#e5e7eb] overflow-hidden z-50 animate-in slide-in-from-top-2 duration-200">
+                                            {/* User Info Header */}
+                                            <div className="p-4 border-b border-[#e5e7eb] flex items-center gap-3">
+                                                <div className="w-11 h-11 rounded-full flex items-center justify-center border border-[#7EB0AB] bg-[#e6f7f2] text-[#7EB0AB] font-bold text-lg">
+                                                    {userInitials}
+                                                </div>
+                                                <div className="flex flex-col overflow-hidden">
+                                                    <span className="text-[14px] font-bold text-[#1a1a1a] truncate">{userName}</span>
+                                                    <span className="text-[12px] font-medium text-[#5a6a75] truncate">{userEmail}</span>
+                                                </div>
+                                            </div>
+
+                                            <div className="py-2">
+                                                <Link href="/user/profile" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" /><circle cx="12" cy="7" r="4" />
+                                                    </svg>
+                                                    Account
+                                                </Link>
+                                                <button className="w-full flex items-center justify-between px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group text-left">
+                                                    <div className="flex items-center gap-3">
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                                        </svg>
+                                                        Dark Mode
+                                                    </div>
+                                                </button>
+                                                <Link href="/user/settings" onClick={() => setShowProfileMenu(false)} className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group border-b border-[#f0f2f5]">
+                                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                        <circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                                                    </svg>
+                                                    Settings
+                                                </Link>
+
+                                                <div className="p-2">
+                                                    <button
+                                                        onClick={() => { setShowProfileMenu(false); setShowLogoutConfirm(true); }}
+                                                        className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[14px] font-bold text-[#1a1a1a] hover:bg-[#e6f7f2] hover:text-[#7EB0AB] transition-colors group"
+                                                    >
+                                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#5a6a75] group-hover:text-[#7EB0AB] transition-colors">
+                                                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
+                                                        </svg>
+                                                        Sign Out
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </>
                         )}
                         {!isAuthenticated && !isLoading && (
-                            <Link href="/user/signin" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90" style={{ background: '#3CD894' }}>
+                            <Link href="/user/signin" className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold text-white transition-all hover:opacity-90" style={{ background: '#7EB0AB' }}>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" /><polyline points="10 17 15 12 10 7" /><line x1="15" y1="12" x2="3" y2="12" />
                                 </svg>
@@ -1115,529 +1221,346 @@ export default function UserDashboardPage() {
                 </div>
             </nav>
 
-            {/* ─── Main Content ─── */}
-            <div className="max-w-[1600px] mx-auto px-6 lg:px-10 py-8">
-                {/* Page Header */}
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-                    <div>
-                        <h1 className="text-2xl md:text-[28px] font-bold text-[#1a1a1a] mb-1">Find Your Next Role</h1>
-                        <p className="text-sm md:text-[15px] text-[#5a6a75]">Browse open positions from top companies</p>
-                    </div>
-
-                    {/* Mobile Filter Button */}
-                    <button
-                        onClick={() => setShowMobileFilters(true)}
-                        className="lg:hidden flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#d1d5db] rounded-xl text-sm font-semibold text-[#1a1a1a] shadow-sm hover:bg-[#f9fafb]"
-                    >
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="4" y1="21" x2="4" y2="14" />
-                            <line x1="4" y1="10" x2="4" y2="3" />
-                            <line x1="12" y1="21" x2="12" y2="12" />
-                            <line x1="12" y1="8" x2="12" y2="3" />
-                            <line x1="20" y1="21" x2="20" y2="16" />
-                            <line x1="20" y1="12" x2="20" y2="3" />
-                            <line x1="1" y1="14" x2="7" y2="14" />
-                            <line x1="9" y1="8" x2="15" y2="8" />
-                            <line x1="17" y1="16" x2="23" y2="16" />
-                        </svg>
-                        Filters
-                    </button>
-                </div>
-
-                <div className="flex gap-8">
-                    {/* ─── Left Sidebar ─── */}
-                    <aside className={`hidden lg:block flex-shrink-0 ${selectedJob ? 'w-[200px]' : 'w-[240px]'} transition-all duration-300`}>
-                        {/* Search */}
-                        <div className="relative mb-6">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                </svg>
-                            </div>
-                            <input
-                                type="text"
-                                placeholder="Search jobs..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-10 pr-3 py-2.5 border border-[#d1d5db] rounded-lg text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all"
-                            />
-                        </div>
-
-                        {/* Date Posted */}
-                        <div className="mb-6">
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Date Posted</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {DATE_FILTERS.map((filter) => (
-                                    <button
-                                        key={filter}
-                                        onClick={() => setActiveDateFilter(filter)}
-                                        style={{
-                                            transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
-                                            transform: activeDateFilter === filter ? 'scale(1.05)' : 'scale(1)',
-                                            boxShadow: activeDateFilter === filter ? '0 2px 8px rgba(30,58,79,0.18)' : 'none',
-                                        }}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-medium ${activeDateFilter === filter
-                                            ? 'bg-[#1e3a4f] text-white'
-                                            : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
-                                            }`}
-                                    >
-                                        {filter}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Skills / Tags Filter */}
-                        <div className="mb-6">
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Skills</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {(showAllSkills ? ALL_TAGS : ALL_TAGS.slice(0, 6)).map((skill) => (
-                                    <button
-                                        key={skill}
-                                        onClick={() => toggleSkill(skill)}
-                                        style={{
-                                            transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
-                                            transform: selectedSkills.includes(skill) ? 'scale(1.07)' : 'scale(1)',
-                                            boxShadow: selectedSkills.includes(skill) ? '0 2px 8px rgba(60,216,148,0.25)' : 'none',
-                                        }}
-                                        className={`px-3 py-1.5 rounded-full text-xs font-medium ${selectedSkills.includes(skill)
-                                            ? 'bg-[#3CD894] text-white'
-                                            : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
-                                            }`}
-                                    >
-                                        {skill}
-                                    </button>
-                                ))}
-                            </div>
-                            {ALL_TAGS.length > 6 && (
-                                <button
-                                    onClick={() => setShowAllSkills(!showAllSkills)}
-                                    className="mt-2 text-xs font-medium text-[#3CD894] hover:text-[#2bb87a] transition-colors"
-                                >
-                                    {showAllSkills ? 'Show Less' : `+${ALL_TAGS.length - 6} more`}
-                                </button>
-                            )}
-                        </div>
-
-                        {/* Company */}
-                        <div>
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Company</h3>
-                            <div className="space-y-2">
-                                {(showAllCompanies ? COMPANIES : COMPANIES.slice(0, 4)).map((company) => (
-                                    <label key={company} className="flex items-center gap-2.5 cursor-pointer group">
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedCompanies.includes(company)}
-                                            onChange={() => toggleCompany(company)}
-                                            className="w-4 h-4 rounded border-[#d1d5db] text-[#3CD894] focus:ring-[#3CD894] accent-[#3CD894]"
-                                        />
-                                        <span className="text-sm text-[#5a6a75] group-hover:text-[#1a1a1a] transition-colors">{company}</span>
-                                    </label>
-                                ))}
-                            </div>
-                            {COMPANIES.length > 4 && (
-                                <button
-                                    onClick={() => setShowAllCompanies(!showAllCompanies)}
-                                    className="mt-2 text-xs font-medium text-[#3CD894] hover:text-[#2bb87a] transition-colors"
-                                >
-                                    {showAllCompanies ? 'Show Less' : `+${COMPANIES.length - 4} more`}
-                                </button>
-                            )}
-                        </div>
-
-                        {/* Clear Filters */}
-                        {(selectedSkills.length > 0 || selectedCompanies.length > 0 || searchQuery.trim()) && (
-                            <button
-                                onClick={() => {
-                                    setSelectedSkills([]);
-                                    setSelectedCompanies([]);
-                                    setSearchQuery('');
-                                }}
-                                style={{ transition: 'opacity 0.3s ease, transform 0.3s ease' }}
-                                className="mt-5 w-full px-3 py-2 rounded-lg text-xs font-semibold text-[#5a6a75] border border-[#d1d5db] hover:bg-[#f0f2f5] hover:text-[#1a1a1a] transition-colors flex items-center justify-center gap-1.5"
-                            >
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                                </svg>
-                                Clear Filters
-                            </button>
-                        )}
-                    </aside>
-
-                    {/* ─── Job Cards Grid ─── */}
-                    <main className={`min-w-0 transition-all duration-200 ${selectedJob
-                        ? 'hidden lg:block lg:w-[340px] flex-shrink-0'
-                        : 'flex-1'
-                        }`}>
-                        <div className={`grid gap-5 ${selectedJob ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3'}`}>
-                            {filteredJobs.map((job, index) => (
-                                <JobCard
-                                    key={job.id}
-                                    job={job}
-                                    isSelected={selectedJob?.id === job.id}
-                                    isBookmarked={bookmarked.includes(job.id)}
-                                    onSelect={() => {
-                                        setSelectedJob(job);
-                                        // On mobile, show details immediately? Or maybe just select it.
-                                        // The current logic seems to just select.
-                                    }}
-                                    onBookmark={(e) => {
-                                        e.stopPropagation();
-                                        isAuthenticated ? toggleBookmark(job.id) : setShowAuthPrompt(true);
-                                    }}
-                                    delay={index * 50}
-                                    visible={visibleIds.includes(job.id)}
-                                />
-                            ))}
-                        </div>
-                    </main>
-
-                    {/* ─── Job Detail Panel (Desktop) ─── */}
-                    {selectedJob && (
-                        <aside className="hidden lg:flex flex-1 min-w-0 sticky top-24 self-start">
-                            <div className="bg-white rounded-2xl border border-[#e5e7eb] p-8 max-h-[calc(100vh-120px)] overflow-y-auto w-full">
-                                {/* Header */}
-                                <div className="flex items-start justify-between mb-6">
-                                    <div className="flex items-center gap-4">
-                                        <div
-                                            className="w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-base"
-                                            style={{ backgroundColor: selectedJob.color }}
-                                        >
-                                            {selectedJob.initials}
-                                        </div>
-                                        <div>
-                                            <h2 className="text-xl font-bold text-[#1a1a1a]">{selectedJob.company}</h2>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <button
-                                            onClick={() => isAuthenticated ? setShowApplyModal(true) : setShowAuthPrompt(true)}
-                                            className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-md"
-                                            style={{ background: '#3CD894' }}
-                                        >
-                                            APPLY NOW
-                                        </button>
-                                        <button
-                                            onClick={() => isAuthenticated ? toggleBookmark(selectedJob.id) : setShowAuthPrompt(true)}
-                                            className="text-[#9ca3af] hover:text-[#1e3a4f] transition-colors p-2"
-                                        >
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'none'} stroke={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-                                            </svg>
-                                        </button>
-                                        <button
-                                            onClick={() => setSelectedJob(null)}
-                                            className="text-[#9ca3af] hover:text-[#1a1a1a] transition-colors p-2"
-                                        >
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                {/* Meta */}
-                                <div className="flex items-center gap-4 mb-5 text-[14px] text-[#5a6a75]">
-                                    <span className="flex items-center gap-1.5">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
-                                        {selectedJob.location}
-                                    </span>
-                                    <span className="flex items-center gap-1.5">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                                        {selectedJob.timeAgo}
-                                    </span>
-                                    <span className={`px-3 py-1 rounded-full text-[12px] font-semibold ${selectedJob.type === 'Full-time'
-                                        ? 'bg-[#e6f7f2] text-[#3CD894]'
-                                        : 'bg-[#fef3e2] text-[#b8860b]'
-                                        }`}>
-                                        {selectedJob.type}
-                                    </span>
-                                </div>
-
-                                {/* Salary */}
-                                <p className="text-lg font-bold text-[#1a1a1a] mb-6">{selectedJob.salary}</p>
-
-                                <hr className="border-[#e5e7eb] mb-6" />
-
-                                {/* Position */}
-                                <div className="mb-6">
-                                    <h3 className="text-[15px] font-bold text-[#1a1a1a] mb-2">Position</h3>
-                                    <p className="text-[14px] text-[#5a6a75]">*{selectedJob.position}</p>
-                                </div>
-
-                                {/* Tech Stack */}
-                                <div className="mb-6">
-                                    <h3 className="text-[15px] font-bold text-[#1a1a1a] mb-3">Tech Stack Requirements</h3>
-                                    <div className="flex flex-wrap gap-2.5">
-                                        {selectedJob.tags.map((tag) => (
-                                            <span
-                                                key={tag}
-                                                className="px-4 py-1.5 rounded-full text-[13px] font-medium bg-[#e6faf0] text-[#3CD894]"
-                                            >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Description */}
-                                <div className="mb-6">
-                                    <h3 className="text-[15px] font-bold text-[#1a1a1a] mb-3">Description</h3>
-                                    <p className="text-[14px] text-[#5a6a75] leading-[1.7]">{selectedJob.description}</p>
-                                </div>
-
-                                {/* What You'll Do */}
-                                <div className="mb-6">
-                                    <h3 className="text-[15px] font-bold text-[#1a1a1a] mb-3">What You&apos;ll Do</h3>
-                                    <ul className="space-y-2.5">
-                                        {selectedJob.whatYoullDo.map((item, i) => (
-                                            <li key={i} className="text-[14px] text-[#5a6a75] leading-[1.7] flex gap-2.5">
-                                                <span className="text-[#3CD894] font-bold mt-0.5">•</span>
-                                                <span><strong className="text-[#1a1a1a]">{item.split(':')[0]}:</strong>{item.split(':').slice(1).join(':')}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-
-                                {/* Why Company */}
-                                <div>
-                                    <h3 className="text-[15px] font-bold text-[#1a1a1a] mb-3">Why {selectedJob.company}?</h3>
-                                    <ul className="space-y-2.5">
-                                        {selectedJob.whyCompany.map((item, i) => (
-                                            <li key={i} className="text-[14px] text-[#5a6a75] leading-[1.7] flex gap-2.5">
-                                                <span className="text-[#3CD894] font-bold mt-0.5">•</span>
-                                                <span><strong className="text-[#1a1a1a]">{item.split(':')[0]}:</strong>{item.split(':').slice(1).join(':')}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </aside>
-                    )}
-                </div>
-            </div>
-
-            {/* ─── Mobile Filters Modal ─── */}
-            {showMobileFilters && (
-                <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-white animate-in slide-in-from-bottom duration-200">
-                    <div className="flex items-center justify-between p-4 border-b border-[#e5e7eb]">
-                        <h2 className="text-lg font-bold text-[#1a1a1a]">Filters</h2>
-                        <button
-                            onClick={() => setShowMobileFilters(false)}
-                            className="p-2 text-[#5a6a75] hover:bg-[#f0f2f5] rounded-full"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div className="flex-1 overflow-y-auto p-6">
-                        {/* Reusing Sidebar Content */}
-                        <div className="relative mb-8">
-                            <input
-                                type="text"
-                                placeholder="Search jobs..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full pl-10 pr-3 py-3 border border-[#d1d5db] rounded-xl text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent transition-all shadow-sm"
-                            />
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div className="mb-8">
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3 uppercase tracking-wider">Date Posted</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {DATE_FILTERS.map((filter) => (
-                                    <button
-                                        key={filter}
-                                        onClick={() => setActiveDateFilter(filter)}
-                                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeDateFilter === filter
-                                            ? 'bg-[#1e3a4f] text-white shadow-md'
-                                            : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
-                                            }`}
-                                    >
-                                        {filter}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="mb-8">
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3 uppercase tracking-wider">Skills</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {ALL_TAGS.map((skill) => (
-                                    <button
-                                        key={skill}
-                                        onClick={() => toggleSkill(skill)}
-                                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedSkills.includes(skill)
-                                            ? 'bg-[#3CD894] text-white shadow-md'
-                                            : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
-                                            }`}
-                                    >
-                                        {skill}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div>
-                            <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3 uppercase tracking-wider">Company</h3>
-                            <div className="space-y-3">
-                                {COMPANIES.map((company) => (
-                                    <label key={company} className="flex items-center gap-3 cursor-pointer group p-2 hover:bg-[#f9fafb] rounded-lg transition-colors">
-                                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${selectedCompanies.includes(company) ? 'bg-[#3CD894] border-[#3CD894]' : 'border-[#d1d5db] bg-white'}`}>
-                                            {selectedCompanies.includes(company) && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>}
-                                        </div>
-                                        <input
-                                            type="checkbox"
-                                            checked={selectedCompanies.includes(company)}
-                                            onChange={() => toggleCompany(company)}
-                                            className="hidden"
-                                        />
-                                        <span className="text-sm font-medium text-[#5a6a75] group-hover:text-[#1a1a1a] transition-colors">{company}</span>
-                                    </label>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="p-4 border-t border-[#e5e7eb] flex gap-3">
-                        <button
-                            onClick={() => {
-                                setSelectedSkills([]);
-                                setSelectedCompanies([]);
-                                setActiveDateFilter('All Time');
-                                setSearchQuery('');
-                            }}
-                            className="flex-1 py-3 text-sm font-semibold text-[#5a6a75] bg-[#f0f2f5] rounded-xl hover:bg-[#e5e7eb] transition-colors"
-                        >
-                            Reset
-                        </button>
-                        <button
-                            onClick={() => setShowMobileFilters(false)}
-                            className="flex-1 py-3 text-sm font-semibold text-white rounded-xl shadow-md transition-opacity hover:opacity-90"
-                            style={{ background: '#3CD894' }}
-                        >
-                            Show Results
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* ─── Mobile Job Details Overlay ─── */}
-            {selectedJob && (
-                <div className="fixed inset-0 z-40 lg:hidden bg-white animate-in slide-in-from-right duration-300 flex flex-col h-full overflow-hidden">
-                    {/* Header */}
-                    <div className="flex items-center gap-3 p-4 border-b border-[#e5e7eb] bg-white sticky top-0 z-10">
-                        <button
-                            onClick={() => setSelectedJob(null)}
-                            className="p-2 -ml-2 text-[#5a6a75] hover:text-[#1a1a1a] hover:bg-[#f0f2f5] rounded-full transition-colors"
-                        >
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M19 12H5" /><path d="M12 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <h2 className="text-base font-bold text-[#1a1a1a] truncate flex-1">{selectedJob.title}</h2>
-                        <button
-                            onClick={() => toggleBookmark(selectedJob.id)}
-                            className="text-[#9ca3af] hover:text-[#1e3a4f] transition-colors p-2"
-                        >
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'none'} stroke={bookmarked.includes(selectedJob.id) ? '#1e3a4f' : 'currentColor'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 overflow-y-auto p-5 pb-24">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div
-                                className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-sm"
-                                style={{ backgroundColor: selectedJob.color }}
-                            >
-                                {selectedJob.initials}
-                            </div>
+            {/* ─── Main Content Wrapper ─── */}
+            <div className="w-full overflow-hidden relative">
+                {/* 200% wide flex container for sliding. Left 50% = Grid, Right 50% = Details */}
+                <div
+                    className="flex w-[200%] transition-transform duration-500 ease-in-out"
+                    style={{ transform: activeView === 'grid' ? 'translateX(0)' : 'translateX(-50%)' }}
+                >
+                    {/* ─── View 1: Grid (Left half) ─── */}
+                    <div className="w-[50%] flex-shrink-0 max-w-[1400px] mx-auto px-6 lg:px-10 py-8">
+                        {/* Mobile Page Header (Visible only on small screens) */}
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 lg:hidden">
                             <div>
-                                <h2 className="text-xl font-bold text-[#1a1a1a] mb-1">{selectedJob.company}</h2>
-                                <p className="text-sm text-[#5a6a75]">{selectedJob.location}</p>
+                                <h1 className="text-2xl md:text-[28px] font-bold text-[#1a1a1a] mb-1">Find Your Next Role</h1>
+                                <p className="text-sm md:text-[15px] text-[#5a6a75]">Browse open positions from top companies</p>
                             </div>
+
+                            {/* Mobile Filter Button */}
+                            <button
+                                onClick={() => setShowMobileFilters(true)}
+                                className="flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-[#e5e7eb] rounded-xl text-sm font-semibold text-[#1a1a1a] shadow-sm hover:bg-[#f9fafb] transition-all"
+                            >
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <line x1="4" y1="21" x2="4" y2="14" />
+                                    <line x1="4" y1="10" x2="4" y2="3" />
+                                    <line x1="12" y1="21" x2="12" y2="12" />
+                                    <line x1="12" y1="8" x2="12" y2="3" />
+                                    <line x1="20" y1="21" x2="20" y2="16" />
+                                    <line x1="20" y1="12" x2="20" y2="3" />
+                                    <line x1="1" y1="14" x2="7" y2="14" />
+                                    <line x1="9" y1="8" x2="15" y2="8" />
+                                    <line x1="17" y1="16" x2="23" y2="16" />
+                                </svg>
+                                Filters
+                            </button>
                         </div>
 
-                        <div className="flex flex-wrap gap-3 mb-6">
-                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${selectedJob.type === 'Full-time' ? 'bg-[#e6f7f2] text-[#3CD894]' : 'bg-[#fef3e2] text-[#b8860b]'}`}>
-                                {selectedJob.type}
-                            </span>
-                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-[#f0f2f5] text-[#5a6a75] flex items-center gap-1">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
-                                {selectedJob.timeAgo}
-                            </span>
-                        </div>
 
-                        <p className="text-xl font-bold text-[#1a1a1a] mb-8">{selectedJob.salary}</p>
+                        <div className="flex gap-8">
+                            {/* ─── Left Sidebar ─── */}
+                            <aside className={`hidden lg:block flex-shrink-0 ${selectedJob ? 'w-[200px]' : 'w-[240px]'} transition-all duration-300`}>
+                                {/* Desktop Header moved inside styling */}
+                                <div className="mb-6 pb-6 border-b border-[#e5e7eb]">
+                                    <h1 className={`${selectedJob ? 'text-2xl' : 'text-[28px]'} font-bold text-[#1a1a1a] mb-2 leading-tight transition-all`}>Find Your Next Role</h1>
+                                    <p className="text-[14px] text-[#5a6a75] leading-relaxed">Browse open positions from top companies</p>
+                                </div>
 
-                        <div className="space-y-8">
-                            <section>
-                                <h3 className="text-base font-bold text-[#1a1a1a] mb-3">Position</h3>
-                                <p className="text-[15px] text-[#5a6a75] leading-relaxed">{selectedJob.position}</p>
-                            </section>
+                                {/* Search */}
+                                <div className="relative mb-6">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Search jobs..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="w-full pl-10 pr-3 py-2.5 border border-[#d1d5db] rounded-lg text-sm text-[#1a1a1a] placeholder-[#9ca3af] bg-white focus:outline-none focus:ring-2 focus:ring-[#7EB0AB] focus:border-transparent transition-all"
+                                    />
+                                </div>
 
-                            <section>
-                                <h3 className="text-base font-bold text-[#1a1a1a] mb-3">Tech Stack</h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {selectedJob.tags.map((tag) => (
-                                        <span key={tag} className="px-3 py-1.5 rounded-lg text-sm font-medium bg-[#e6faf0] text-[#3CD894] border border-[#d1fae5]">
-                                            {tag}
-                                        </span>
+                                {/* Date Posted */}
+                                <div className="mb-6">
+                                    <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Date Posted</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {DATE_FILTERS.map((filter) => (
+                                            <button
+                                                key={filter}
+                                                onClick={() => setActiveDateFilter(filter)}
+                                                style={{
+                                                    transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
+                                                    transform: activeDateFilter === filter ? 'scale(1.05)' : 'scale(1)',
+                                                    boxShadow: activeDateFilter === filter ? '0 2px 8px rgba(30,58,79,0.18)' : 'none',
+                                                }}
+                                                className={`px-3 py-1.5 rounded-full text-xs font-medium ${activeDateFilter === filter
+                                                    ? 'bg-[#1e3a4f] text-white'
+                                                    : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
+                                                    }`}
+                                            >
+                                                {filter}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* Skills / Tags Filter */}
+                                <div className="mb-6">
+                                    <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Skills</h3>
+                                    <div className="flex flex-wrap gap-2">
+                                        {(showAllSkills ? ALL_TAGS : ALL_TAGS.slice(0, 6)).map((skill) => (
+                                            <button
+                                                key={skill}
+                                                onClick={() => toggleSkill(skill)}
+                                                style={{
+                                                    transition: 'background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease',
+                                                    transform: selectedSkills.includes(skill) ? 'scale(1.07)' : 'scale(1)',
+                                                    boxShadow: selectedSkills.includes(skill) ? '0 2px 8px rgba(60,216,148,0.25)' : 'none',
+                                                }}
+                                                className={`px-3 py-1.5 rounded-full text-xs font-medium ${selectedSkills.includes(skill)
+                                                    ? 'bg-[#7EB0AB] text-white'
+                                                    : 'bg-white border border-[#d1d5db] text-[#5a6a75] hover:bg-[#f0f2f5]'
+                                                    }`}
+                                            >
+                                                {skill}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    {ALL_TAGS.length > 6 && (
+                                        <button
+                                            onClick={() => setShowAllSkills(!showAllSkills)}
+                                            className="mt-2 text-xs font-medium text-[#7EB0AB] hover:text-[#6A9994] transition-colors"
+                                        >
+                                            {showAllSkills ? 'Show Less' : `+${ALL_TAGS.length - 6} more`}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Company */}
+                                <div>
+                                    <h3 className="text-sm font-semibold text-[#1a1a1a] mb-3">Company</h3>
+                                    <div className="space-y-2">
+                                        {(showAllCompanies ? COMPANIES : COMPANIES.slice(0, 4)).map((company) => (
+                                            <label key={company} className="flex items-center gap-2.5 cursor-pointer group">
+                                                <input
+                                                    type="checkbox"
+                                                    checked={selectedCompanies.includes(company)}
+                                                    onChange={() => toggleCompany(company)}
+                                                    className="w-4 h-4 rounded border-[#d1d5db] text-[#7EB0AB] focus:ring-[#7EB0AB] accent-[#7EB0AB]"
+                                                />
+                                                <span className="text-sm text-[#5a6a75] group-hover:text-[#1a1a1a] transition-colors">{company}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                    {COMPANIES.length > 4 && (
+                                        <button
+                                            onClick={() => setShowAllCompanies(!showAllCompanies)}
+                                            className="mt-2 text-xs font-medium text-[#7EB0AB] hover:text-[#6A9994] transition-colors"
+                                        >
+                                            {showAllCompanies ? 'Show Less' : `+${COMPANIES.length - 4} more`}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Clear Filters */}
+                                {(selectedSkills.length > 0 || selectedCompanies.length > 0 || searchQuery.trim()) && (
+                                    <button
+                                        onClick={() => {
+                                            setSelectedSkills([]);
+                                            setSelectedCompanies([]);
+                                            setSearchQuery('');
+                                        }}
+                                        style={{ transition: 'opacity 0.3s ease, transform 0.3s ease' }}
+                                        className="mt-5 w-full px-3 py-2 rounded-lg text-xs font-semibold text-[#5a6a75] border border-[#d1d5db] hover:bg-[#f0f2f5] hover:text-[#1a1a1a] transition-colors flex items-center justify-center gap-1.5"
+                                    >
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                                        </svg>
+                                        Clear Filters
+                                    </button>
+                                )}
+                            </aside>
+
+                            {/* ─── Job Cards Grid ─── */}
+                            <main className="min-w-0 transition-all duration-200 flex-1">
+                                <div className="grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+                                    {filteredJobs.map((job, index) => (
+                                        <JobCard
+                                            key={job.id}
+                                            job={job}
+                                            isSelected={false}
+                                            isBookmarked={bookmarked.includes(job.id)}
+                                            onSelect={() => {
+                                                handleSelectJob(job);
+                                                // On mobile, show details immediately? Or maybe just select it.
+                                                // The current logic seems to just select.
+                                            }}
+                                            onBookmark={(e) => {
+                                                e.stopPropagation();
+                                                isAuthenticated ? toggleBookmark(job.id) : setShowAuthPrompt(true);
+                                            }}
+                                            delay={index * 50}
+                                            visible={visibleIds.includes(job.id)}
+                                        />
                                     ))}
                                 </div>
-                            </section>
-
-                            <section>
-                                <h3 className="text-base font-bold text-[#1a1a1a] mb-3">Description</h3>
-                                <p className="text-[15px] text-[#5a6a75] leading-relaxed mb-4">{selectedJob.description}</p>
-                            </section>
-
-                            <section>
-                                <h3 className="text-base font-bold text-[#1a1a1a] mb-3">What You&apos;ll Do</h3>
-                                <ul className="space-y-3">
-                                    {selectedJob.whatYoullDo.map((item, i) => (
-                                        <li key={i} className="flex gap-3 text-[15px] text-[#5a6a75] leading-relaxed">
-                                            <span className="text-[#3CD894] font-bold text-lg leading-none mt-1">•</span>
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
-
-                            <section>
-                                <h3 className="text-base font-bold text-[#1a1a1a] mb-3">Why {selectedJob.company}?</h3>
-                                <ul className="space-y-3">
-                                    {selectedJob.whyCompany.map((item, i) => (
-                                        <li key={i} className="flex gap-3 text-[15px] text-[#5a6a75] leading-relaxed">
-                                            <span className="text-[#3CD894] font-bold text-lg leading-none mt-1">•</span>
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </section>
+                            </main>
                         </div>
                     </div>
 
-                    {/* Fixed Apply Button */}
-                    <div className="p-4 border-t border-[#e5e7eb] bg-white absolute bottom-0 left-0 right-0">
-                        <button
-                            onClick={() => isAuthenticated ? setShowApplyModal(true) : setShowAuthPrompt(true)}
-                            className="w-full py-3.5 rounded-xl text-base font-bold text-white shadow-lg transition-transform active:scale-[0.98]"
-                            style={{ background: '#3CD894' }}
-                        >
-                            APPLY NOW
-                        </button>
+                    {/* ─── View 2: Job Details (Right half) ─── */}
+                    <div className="w-[50%] flex-shrink-0 max-w-[1400px] mx-auto px-6 lg:px-10 py-8">
+                        {lastSelectedJob && (
+                            <div className="w-full pb-16">
+                                {/* Breadcrumbs */}
+                                <div className="flex items-center gap-2 text-sm text-[#5a6a75] mb-6">
+                                    <button onClick={handleClearSelection} className="hover:text-[#1e3a4f] transition-colors">Home</button>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
+                                    <span className="font-semibold text-[#1e3a4f]">{lastSelectedJob.position}</span>
+                                </div>
+
+                                <div className="flex flex-col lg:flex-row gap-6 items-start">
+                                    {/* Left Column */}
+                                    <div className="flex-1 w-full bg-white rounded-2xl border border-[#e5e7eb] p-6 lg:p-8 relative">
+                                        {/* Avatar & Title */}
+                                        <div className="flex flex-col sm:flex-row gap-5 items-start mb-6">
+                                            <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-white font-bold text-2xl flex-shrink-0 shadow-sm" style={{ backgroundColor: lastSelectedJob.color }}>
+                                                {lastSelectedJob.initials}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h1 className="text-2xl md:text-[28px] font-bold text-[#1a1a1a] mb-2">{lastSelectedJob.title}</h1>
+                                                <div className="flex flex-wrap items-center gap-3 text-sm text-[#5a6a75]">
+                                                    <span className="font-medium text-[#1e3a4f]">{lastSelectedJob.company}</span>
+                                                    <span className="flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>{lastSelectedJob.location}</span>
+                                                    <span className="flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>{lastSelectedJob.timeAgo}</span>
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-4">
+                                                    <span className="px-3 py-1 bg-[#f0f2f5] text-[#1a1a1a] text-xs font-semibold rounded-full border border-[#e5e7eb]">{lastSelectedJob.type}</span>
+                                                    <span className="px-3 py-1 bg-[#f0f2f5] text-[#1a1a1a] text-xs font-semibold rounded-full border border-[#e5e7eb]">{lastSelectedJob.salary}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Actions */}
+                                        <div className="flex flex-col sm:flex-row gap-3 w-full mb-8">
+                                            <button onClick={() => isAuthenticated ? setShowApplyModal(true) : setShowAuthPrompt(true)} className="flex-1 py-3.5 rounded-xl text-white font-bold text-[15px] transition-all hover:opacity-90 shadow-md flex justify-center items-center" style={{ background: '#7EB0AB' }}>
+                                                Apply Now
+                                            </button>
+                                            <button onClick={() => isAuthenticated ? toggleBookmark(lastSelectedJob.id) : setShowAuthPrompt(true)} className="flex-1 py-3.5 rounded-xl bg-white border border-[#e5e7eb] text-[#1a1a1a] font-semibold text-[15px] transition-all hover:bg-[#f9fafb] flex justify-center items-center gap-2 shadow-sm">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill={bookmarked.includes(lastSelectedJob.id) ? '#1a1a1a' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" /></svg>
+                                                {bookmarked.includes(lastSelectedJob.id) ? 'Saved' : 'Save Job'}
+                                            </button>
+                                        </div>
+
+                                        <hr className="border-[#e5e7eb] mb-8" />
+
+                                        {/* Tags */}
+                                        <div className="flex flex-wrap gap-2 mb-8">
+                                            {lastSelectedJob.tags.map(tag => (
+                                                <span key={tag} className="px-4 py-1.5 rounded-full text-[13px] font-medium bg-[#e6f7f2] text-[#7EB0AB] border border-[#7EB0AB]/20">{tag}</span>
+                                            ))}
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="space-y-8">
+                                            <section>
+                                                <h3 className="text-[17px] font-bold text-[#1a1a1a] mb-3">Job Description</h3>
+                                                <p className="text-[15px] text-[#5a6a75] leading-relaxed">{lastSelectedJob.description}</p>
+                                            </section>
+                                            <section>
+                                                <h3 className="text-[17px] font-bold text-[#1a1a1a] mb-3">Responsibilities</h3>
+                                                <ul className="space-y-2.5">
+                                                    {lastSelectedJob.whatYoullDo.map((item, i) => (
+                                                        <li key={i} className="flex gap-3 text-[15px] text-[#5a6a75] leading-relaxed">
+                                                            <span className="text-[#5a6a75] font-bold mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                            <section>
+                                                <h3 className="text-[17px] font-bold text-[#1a1a1a] mb-3">Qualifications</h3>
+                                                <ul className="space-y-2.5">
+                                                    {lastSelectedJob.whyCompany.map((item, i) => (
+                                                        <li key={i} className="flex gap-3 text-[15px] text-[#5a6a75] leading-relaxed">
+                                                            <span className="text-[#5a6a75] font-bold mt-0.5">•</span>
+                                                            <span>{item}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </section>
+                                        </div>
+
+                                        {/* Report Job Footer */}
+                                        <div className="mt-8 pt-6 border-t border-[#e5e7eb] flex items-center justify-between bg-[#fcfcfc] -mx-6 lg:-mx-8 -mb-6 lg:-mb-8 px-6 lg:px-8 py-4 rounded-b-2xl">
+                                            <button className="text-sm font-medium text-[#5a6a75] hover:text-[#1a1a1a]">Report this job posting</button>
+                                            <div className="flex gap-3 text-[#9ca3af]">
+                                                <button className="hover:text-[#1a1a1a] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg></button>
+                                                <button className="hover:text-[#1a1a1a] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" /><line x1="4" y1="22" x2="4" y2="15" /></svg></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column */}
+                                    <div className="w-full lg:w-[360px] flex flex-col gap-6 flex-shrink-0">
+                                        {/* Meet the Recruiter */}
+                                        <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 lg:p-8">
+                                            <h3 className="text-[17px] font-bold text-[#1a1a1a] mb-5">Meet the Recruiter</h3>
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-12 h-12 rounded-full overflow-hidden bg-[#f0f2f5] border border-[#e5e7eb]">
+                                                    <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop" width={48} height={48} alt="Jane Doe" className="w-full h-full object-cover" />
+                                                </div>
+                                                <div>
+                                                    <h4 className="text-[15px] font-bold text-[#1a1a1a]">Jane Doe</h4>
+                                                    <p className="text-[13px] text-[#5a6a75]">Senior Tech Talent Partner</p>
+                                                </div>
+                                            </div>
+                                            <button className="w-full py-2.5 rounded-xl bg-white border border-[#e5e7eb] text-[#1a1a1a] font-semibold text-[14px] transition-all hover:bg-[#f9fafb] flex justify-center items-center gap-2 shadow-sm">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
+                                                Message Jane
+                                            </button>
+                                        </div>
+
+                                        {/* Similar Jobs */}
+                                        <div className="bg-white rounded-2xl border border-[#e5e7eb] p-6 lg:p-8">
+                                            <h3 className="text-[17px] font-bold text-[#1a1a1a] mb-5">Similar Jobs</h3>
+                                            <div className="flex flex-col gap-5 mb-6">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-[#1a1a1a]">Fullstack Engineer (React/Node)</h4>
+                                                        <p className="text-[13px] text-[#5a6a75] mt-0.5">DataFlow • Remote</p>
+                                                    </div>
+                                                    <span className="text-[13px] font-semibold text-[#1a1a1a] mb-1">$130k-170k</span>
+                                                </div>
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-[#1a1a1a]">UX Engineer</h4>
+                                                        <p className="text-[13px] text-[#5a6a75] mt-0.5">Streamline • New York</p>
+                                                    </div>
+                                                    <span className="text-[13px] font-semibold text-[#1a1a1a] mb-1">$110k-145k</span>
+                                                </div>
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <h4 className="text-[14px] font-bold text-[#1a1a1a]">Lead Product Developer</h4>
+                                                        <p className="text-[13px] text-[#5a6a75] mt-0.5">CloudSync • Hybrid</p>
+                                                    </div>
+                                                    <span className="text-[13px] font-semibold text-[#1a1a1a] mb-1">$150k-200k</span>
+                                                </div>
+                                            </div>
+                                            <button className="w-full py-2.5 rounded-xl bg-white border border-[#e5e7eb] text-[#1a1a1a] font-bold text-[14px] transition-all hover:bg-[#f9fafb] flex justify-center items-center shadow-sm">
+                                                View All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                </div>
-            )}
+                </div> {/* Close sliding wrapper */}
+            </div>
 
             {/* ─── Multi-Step Apply Modal ─── */}
             {showApplyModal && selectedJob && (
@@ -1646,13 +1569,14 @@ export default function UserDashboardPage() {
                     onClose={() => setShowApplyModal(false)}
                 />
             )}
+
             {/* ─── Sign Out Confirmation Modal ─── */}
             {showLogoutConfirm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" onClick={() => setShowLogoutConfirm(false)}>
                     <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm mx-4 animate-[fadeIn_0.2s_ease-out]" onClick={(e) => e.stopPropagation()}>
                         <div className="flex flex-col items-center text-center">
-                            <div className="w-14 h-14 rounded-full bg-red-50 flex items-center justify-center mb-4">
-                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <div className="w-14 h-14 rounded-full bg-[#e6f7f2] flex items-center justify-center mb-4">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7EB0AB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
                                 </svg>
                             </div>
@@ -1667,7 +1591,8 @@ export default function UserDashboardPage() {
                                 </button>
                                 <button
                                     onClick={() => { localStorage.removeItem('token'); router.push('/user/signin'); }}
-                                    className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-sm font-semibold text-white transition-colors"
+                                    className="flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 shadow-md"
+                                    style={{ background: '#7EB0AB' }}
                                 >
                                     Sign Out
                                 </button>

@@ -1,12 +1,15 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import {
     LayoutDashboard,
     Users,
     Briefcase,
     LogOut,
+    Loader2,
 } from 'lucide-react';
+import api from '@/lib/axios';
 
 const navItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -21,15 +24,65 @@ export default function AdminLayout({
 }) {
     const pathname = usePathname();
     const router = useRouter();
+    const [authChecked, setAuthChecked] = useState(false);
 
     // Don't show sidebar on login page
-    if (pathname === '/admin/login') {
+    const isLoginPage = pathname === '/admin/login';
+
+    useEffect(() => {
+        if (isLoginPage) {
+            setAuthChecked(true);
+            return;
+        }
+
+        const token = localStorage.getItem('admin_token');
+        if (!token) {
+            router.replace('/admin/login');
+            return;
+        }
+
+        // Verify token with backend
+        api.post('/admin/me', {}, {
+            headers: { Authorization: `Bearer ${token}` },
+        })
+            .then((res) => {
+                if (res.data.role !== 'admin') {
+                    localStorage.removeItem('admin_token');
+                    router.replace('/admin/login');
+                } else {
+                    setAuthChecked(true);
+                }
+            })
+            .catch(() => {
+                localStorage.removeItem('admin_token');
+                router.replace('/admin/login');
+            });
+    }, [isLoginPage, router]);
+
+    if (isLoginPage) {
         return <>{children}</>;
     }
 
-    const handleLogout = () => {
-        localStorage.removeItem('admin_token');
-        router.push('/admin/login');
+    if (!authChecked) {
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa]">
+                <Loader2 className="h-8 w-8 animate-spin text-[#3CD894]" />
+            </div>
+        );
+    }
+
+    const handleLogout = async () => {
+        const token = localStorage.getItem('admin_token');
+        try {
+            await api.post('/admin/logout', {}, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+        } catch {
+            // Ignore errors during logout
+        } finally {
+            localStorage.removeItem('admin_token');
+            router.push('/admin/login');
+        }
     };
 
     return (

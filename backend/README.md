@@ -57,3 +57,71 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+# AVAA RMS - Backend
+
+## Setup Instructions
+
+### 1. Install Dependencies
+```bash
+composer install
+```
+
+### 2. Environment Setup
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan jwt:secret
+```
+
+### 3. Database Setup
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+### 4. Run the Server
+```bash
+php artisan serve
+```
+
+---
+
+## Default Admin Credentials
+
+After running the seeder, a default admin account is created:
+
+| Field        | Value              |
+|--------------|--------------------|
+| **Email**    | `admin@avaa.com`   |
+| **Password** | `admin123`         |
+
+> ⚠️ **Important:** Change the default admin password immediately after first login in a production environment.
+
+### Admin Login URL
+```
+/admin/login
+```
+
+---
+
+## API Endpoints
+
+### Auth (User)
+| Method | Endpoint          | Description          |
+|--------|-------------------|----------------------|
+| POST   | `/api/register`   | Register a new user  |
+| POST   | `/api/login`      | User login           |
+| POST   | `/api/logout`     | User logout          |
+
+### Auth (Admin)
+| Method | Endpoint             | Description            |
+|--------|----------------------|------------------------|
+| POST   | `/api/admin/login`   | Admin login            |
+| POST   | `/api/admin/me`      | Verify admin token     |
+| POST   | `/api/admin/logout`  | Admin logout           |
+| GET    | `/api/admin/dashboard` | Dashboard statistics |
+| GET    | `/api/admin/users`   | List all users         |

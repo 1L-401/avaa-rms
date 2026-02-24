@@ -114,7 +114,7 @@ export default function ProfilePage() {
         .slice(0, 2);
 
     return (
-        <div className="min-h-screen bg-[#f5f7fa]">
+        <div className="min-h-screen bg-[#f5f7fa] page-enter">
             {/* ─── Navbar ─── */}
             <nav className="sticky top-0 z-30 bg-white border-b border-[#e5e7eb] px-6 lg:px-10">
                 <div className="flex items-center justify-between h-16 max-w-[1400px] mx-auto">
@@ -227,8 +227,8 @@ export default function ProfilePage() {
                                     onChange={(e) => setFullName(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
-                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="Your full name"
                                 />
@@ -272,8 +272,8 @@ export default function ProfilePage() {
                                     onChange={(e) => setPhone(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
-                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="+63 912 345 6789"
                                 />
@@ -296,8 +296,8 @@ export default function ProfilePage() {
                                     onChange={(e) => setLocation(e.target.value)}
                                     readOnly={!isEditing}
                                     className={`w-full pl-10 pr-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all ${isEditing
-                                            ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
-                                            : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                        ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                        : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                         }`}
                                     placeholder="City, Country"
                                 />
@@ -316,8 +316,8 @@ export default function ProfilePage() {
                             readOnly={!isEditing}
                             maxLength={500}
                             className={`w-full px-4 py-3 border border-[#d1d5db] rounded-xl text-sm transition-all resize-none ${isEditing
-                                    ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
-                                    : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
+                                ? 'text-[#1a1a1a] bg-white focus:outline-none focus:ring-2 focus:ring-[#3CD894] focus:border-transparent'
+                                : 'text-[#5a6a75] bg-[#f8fafc] cursor-default'
                                 }`}
                             placeholder="Tell employers a bit about yourself..."
                         />

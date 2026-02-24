@@ -21,13 +21,11 @@ export default function AdminLoginPage() {
         setError('');
         setLoading(true);
         try {
-            if (email === 'admin@avaa.com' && password === 'admin') {
-                router.push('/admin/dashboard');
-            } else {
-                setError('Invalid admin credentials');
-            }
-        } catch (err) {
-            setError('Login failed');
+            const res = await api.post('/admin/login', { email, password });
+            localStorage.setItem('admin_token', res.data.access_token);
+            router.push('/admin/dashboard');
+        } catch (err: any) {
+            setError(err.response?.data?.error || 'Login failed');
         } finally {
             setLoading(false);
         }

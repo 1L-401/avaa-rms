@@ -29,7 +29,7 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa] px-4">
+        <div className="flex min-h-screen items-center justify-center bg-[#f5f7fa] px-4 page-enter">
             <div className="w-full max-w-[480px]">
                 {/* Back to login */}
                 <Link

@@ -2,17 +2,32 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+// Import the Social Auth Controller
+use App\Http\Controllers\SocialAuthController;
 
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
+    // Standard Auth Routes
     Route::post('register', [AuthController::class , 'register']);
     Route::post('login', [AuthController::class , 'login']);
     Route::post('verify-otp', [AuthController::class , 'verifyOtp']);
     Route::post('resend-otp', [AuthController::class , 'resendOtp']);
     Route::post('forgot-password', [AuthController::class , 'forgotPassword']);
     Route::post('reset-password', [AuthController::class , 'resetPassword']);
+
+    // --- Social Authentication Routes ---
+    // Google
+    Route::get('google', [SocialAuthController::class, 'redirectToGoogle']);
+    Route::get('google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
+    
+    // LinkedIn
+    Route::get('linkedin', [SocialAuthController::class, 'redirectToLinkedIn']);
+    Route::get('linkedin/callback', [SocialAuthController::class, 'handleLinkedInCallback']);
+    // -------------------------------------
+
+    // Protected Auth Routes
     Route::post('logout', [AuthController::class , 'logout'])->middleware('auth:api');
     Route::post('refresh', [AuthController::class , 'refresh'])->middleware('auth:api');
     Route::post('me', [AuthController::class , 'me'])->middleware('auth:api');

@@ -148,13 +148,12 @@ export default function ProfilePage() {
                             <span className="hidden sm:inline">Jobs</span>
                         </Link>
 
-                        {/* Saved Jobs Button */}
-                        <button className="flex items-center gap-2 px-3 lg:px-5 py-2.5 rounded-lg border border-[#e5e7eb] text-[15px] font-semibold text-[#1a1a1a] bg-white hover:bg-[#f9fafb] shadow-sm transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-                            </svg>
-                            <span className="hidden sm:inline">Saved Jobs</span>
-                        </button>
+                        {/* Saved Jobs Link */}
+                      <Link href="/user/saved-jobs" className="flex items-center gap-2 px-3 lg:px-5 py-2.5 rounded-lg border border-[#e5e7eb] text-[15px] font-semibold text-[#1a1a1a] bg-white hover:bg-[#f9fafb] shadow-sm transition-colors">
+                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                           </svg>
+                           <span className="hidden sm:inline">Saved Jobs</span>
+                        </Link>
 
                         <>
                             {/* Notification Bell */}

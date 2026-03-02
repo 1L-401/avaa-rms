@@ -2,14 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-// Import the Social Auth Controller
 use App\Http\Controllers\SocialAuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\AdminController;
 
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+*/
+
+// --- Authentication Routes (Prefix: /api/auth) ---
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
-    // Standard Auth Routes
+    // Standard Auth
     Route::post('register', [AuthController::class , 'register']);
     Route::post('login', [AuthController::class , 'login']);
     Route::post('verify-otp', [AuthController::class , 'verifyOtp']);
@@ -17,40 +26,56 @@ Route::group([
     Route::post('forgot-password', [AuthController::class , 'forgotPassword']);
     Route::post('reset-password', [AuthController::class , 'resetPassword']);
 
-    // --- Social Authentication Routes ---
-    // Google
+    // Social Auth
     Route::get('google', [SocialAuthController::class, 'redirectToGoogle']);
     Route::get('google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
-    
-    // LinkedIn
     Route::get('linkedin', [SocialAuthController::class, 'redirectToLinkedIn']);
     Route::get('linkedin/callback', [SocialAuthController::class, 'handleLinkedInCallback']);
-    // -------------------------------------
 
-    // Protected Auth Routes
-    Route::post('logout', [AuthController::class , 'logout'])->middleware('auth:api');
-    Route::post('refresh', [AuthController::class , 'refresh'])->middleware('auth:api');
-    Route::post('me', [AuthController::class , 'me'])->middleware('auth:api');
-    Route::put('profile', [AuthController::class , 'updateProfile'])->middleware('auth:api');
-    Route::put('change-password', [AuthController::class , 'changePassword'])->middleware('auth:api');
+    // Protected User Auth
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::post('logout', [AuthController::class , 'logout']);
+        Route::post('refresh', [AuthController::class , 'refresh']);
+        Route::post('me', [AuthController::class , 'me']);
+        Route::put('profile', [AuthController::class , 'updateProfile']);
+        Route::put('change-password', [AuthController::class , 'changePassword']);
+    });
 });
 
+// --- Admin Routes (Prefix: /api/admin) ---
 Route::group([
     'prefix' => 'admin'
 ], function ($router) {
-    // Public admin route
-    Route::post('login', [App\Http\Controllers\AdminController::class, 'login']);
+    Route::post('login', [AdminController::class, 'login']);
 
-    // Protected admin routes (requires JWT + admin role)
     Route::group(['middleware' => ['auth:api', 'admin']], function () {
-        Route::post('me', [App\Http\Controllers\AdminController::class, 'me']);
-        Route::post('logout', [App\Http\Controllers\AdminController::class, 'logout']);
-        Route::get('dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
-
-        // User management
-        Route::get('users', [App\Http\Controllers\AdminController::class, 'users']);
-        Route::get('users/{id}', [App\Http\Controllers\AdminController::class, 'showUser']);
-        Route::put('users/{id}', [App\Http\Controllers\AdminController::class, 'updateUser']);
-        Route::delete('users/{id}', [App\Http\Controllers\AdminController::class, 'deleteUser']);
+        Route::post('me', [AdminController::class, 'me']);
+        Route::post('logout', [AdminController::class, 'logout']);
+        Route::get('dashboard', [AdminController::class, 'dashboard']);
+        Route::get('users', [AdminController::class, 'users']);
+        Route::get('users/{id}', [AdminController::class, 'showUser']);
+        Route::put('users/{id}', [AdminController::class, 'updateUser']);
+        Route::delete('users/{id}', [AdminController::class, 'deleteUser']);
     });
+});
+
+// --- Job Routes (Prefix: /api/jobs) ---
+Route::group([
+    'prefix' => 'jobs'
+], function () {
+    // Public: View all jobs
+    Route::get('/', [DashboardController::class, 'index']); 
+
+    // Protected: Bookmark a specific job
+    // URL: POST /api/jobs/{jobId}/bookmark
+    Route::post('/{jobId}/bookmark', [BookmarkController::class, 'toggleBookmark'])
+        ->middleware('auth:api');
+});
+
+// --- User Bookmarks Management (Prefix: /api/bookmarks) ---
+Route::group([
+    'middleware' => 'auth:api',
+], function () {
+    // URL: GET /api/bookmarks
+   Route::get('/bookmarks', [BookmarkController::class, 'index']);
 });
